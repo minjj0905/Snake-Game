@@ -31,6 +31,17 @@ int map[21][21] = {
 
 string character[5] = {" ", "I", "V", "O", "~"};
 
+string k() {
+    string n = "";
+    for (int i = 0; i < 21; i++) {
+        for (int j = 0; j < 21; j++) {
+            n += character[map[i][j]];
+        }
+        n += "\n";
+    }
+    return n;
+}
+
 int main() {
     WINDOW *win;
     initscr();
@@ -40,8 +51,8 @@ int main() {
     win = newwin(100, 100, 0, 0);
     wbkgd(win, COLOR_PAIR(1));
     wattron(win, COLOR_PAIR(1));
-    mvwprintw(win, 1, 1, "test");
-    addch(ACS_BLOCK);
+    mvwprintw(win, 0, 0, k().c_str());
+    // addch(ACS_BLOCK);
     wrefresh(win);
     getch();
     delwin(win);
