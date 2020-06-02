@@ -17,7 +17,6 @@ Level::Level(int stage) {
     nowLevel = stage;
 }
 
-/*nowlevel return*/
 int Level::getNowLevel() {
     return nowLevel;
 }

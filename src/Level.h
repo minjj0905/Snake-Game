@@ -21,5 +21,7 @@ public:
     Level();
     Level(int stage);
 
+    /*nowlevel return*/
     int getNowLevel();
+    /*nowlevel return*/
 };
