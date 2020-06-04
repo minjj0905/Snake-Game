@@ -72,18 +72,17 @@
   | char                    | direction   | 방향                      |
   | int                     | growCount   | grow Item 먹은 횟수       |
   | int                     | poisonCount | poison Item 먹은 횟수     |
-  | bool                    | fail        | snake가 뒤졋는지 살았느지 |
+  | bool                    | fail        | snake의 생사여부 |
 
   method
 
   | 리턴타입 | 이름             | 설명        |
   | -------- | ---------------- | ----------- |
-  | bool     | isFailed()       | fail return |
-  | void     |                  |             |
-  |          | getGrowCount()   |             |
-  |          | getPoisonCount() |             |
-  |          | getLength()      |             |
-  |          |                  |             |
+  | bool     | isFailed()       | snake의 생사 여부 반환 |
+  | int      | getGrowCount()   | grow Item 을 먹은 횟수 반환            |
+  | int      | getPoisonCount() | poison Item 먹은 횟수 반환            |
+  | int         | getLength()      | snake의 길이 반환            |
+  |  void     | setFailed()      | snake가 죽음            |
   |          |                  |             |
 
 
