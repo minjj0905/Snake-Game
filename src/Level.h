@@ -1,27 +1,19 @@
 #include <iostream>
-
-class Map {
-public:
-    int mapHeight = 0;
-    int mapWidth = 0;
-    int **map;
-    std::string filename;
-    std::string filepath;
-
-    Map(int stage);
-
-    void loadMap();
-};
+#include <Map.h>
 
 class Level {
 public:
-    int nowLevel;
-    Map *maps;
+    int currentLevel;
+    Map* maps;
 
+    /*생성자*/
     Level();
-    Level(int stage);
+    /*현재 레벨을 가져온다*/
+    int getCurrentLevel();
 
-    /*nowlevel return*/
-    int getNowLevel();
-    /*nowlevel return*/
+    /*레벨을 1 올린다.*/
+    void upCurrentLevel();
+
+    /*레벨에 따른 현재 맵을 가져온다.*/
+    Map getCurrentMap();
 };
