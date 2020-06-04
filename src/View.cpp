@@ -1,4 +1,5 @@
 #include "View.h"
+#include <locale.h>
 
 View::View() {
     Init();
@@ -7,13 +8,16 @@ View::View() {
 void View::Init() {
     initscr();
 
+    resize_term(30, 60);
     noecho();
     curs_set(0); 
     start_color();
 
-
+    border(ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE,
+            ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
     init_pair(1, COLOR_BLACK, COLOR_WHITE);
-    bkgd(COLOR_PAIR(1));
+    init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+    bkgd(COLOR_PAIR(2));
 }
 
 // void View::Draw() {
@@ -24,25 +28,16 @@ void View::Init() {
 
 void View::DrawGame() {
 
-    gameWin = newwin(30, 30, 0, 0);
-    wbkgd(gameWin, COLOR_PAIR(1));
-    wattron(gameWin, COLOR_PAIR(1));
+    gameWin = newwin(20, 20, 3, 3);
+    wbkgd(gameWin, COLOR_PAIR(2));
+    wattron(gameWin, COLOR_PAIR(2));
 
-    box(gameWin, '-', '-');
+    mvwaddch(gameWin, 1, 1, 96|A_ALTCHARSET);
 
-    /*
-    0 = background
-    10 = ─
-    11 = │
-    12 = ┌
-    13 = ┐
-    14 = ┘
-    15 = └
-    20 = ┌
-    21 = ┐
-    22 = ┘
-    23 = └
-    */ 
+    setlocale(LC_ALL, "");
+    mvwprintw(gameWin, 3, 3, "\u25A0");
+    mvwprintw(gameWin, 3, 5, "되냐");
+    wborder(gameWin, '~','~','~','~','~','~','~','~');
 
     int map[21][21] = {
     {2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2},
@@ -69,26 +64,28 @@ void View::DrawGame() {
     };
 
 
-    for(int i=0; i<21; i++) {
-        for(int j=0; j<42; j++) {
+    // for(int i=0; i<21; i++) {
+    //     for(int j=0; j<42; j++) {
 
-            int pos = map[i][j/2];
+    //         int pos = map[i][j/2];
 
-            if(pos == 0) {
-                mvaddch(i, j, ' ');
-            }
-            else if(pos == 1 || pos == 2) {
-                mvaddch(i, j, ACS_BOARD);
-            }
-            else if(pos == 3) {
-                mvaddch(i, j, 'O');
-            }
-            else if(pos == 4) {
-                mvaddch(i, j, 'o');
-            }
-            mvaddch(i, ++j, ' ');
-        }
-    }
+    //         if(pos == 0) {
+    //             // mvaddch(i, j, ' ');
+    //         }
+    //         else if(pos == 1 || pos == 2) {
+    //             // mvaddch(i, j, ACS_BOARD);
+    //             mvwprintw(gameWin, i, j, "-");
+    //         }
+    //         else if(pos == 3) {
+    //             // mvaddch(i, j, 'O');
+    //         }
+    //         else if(pos == 4) {
+    //             // mvaddch(i, j, 'o');
+    //         }
+    //         // mvaddch(i, ++j, ' ');
+    //     }
+    // }
+    refresh();
     wrefresh(gameWin);
 }
 
