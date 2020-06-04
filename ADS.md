@@ -55,7 +55,7 @@
   | 리턴타입 | 이름              | 설명                                |
   | -------- | ----------------- | ----------------------------------- |
   |          | Level()           | 생성자, currentLevel을 0으로 초기화 |
-  | void     | getCurrentLevel() |                                     |
+  | int     | getCurrentLevel() |                                     |
   | void     | upCurrentLevel()  |                                     |
   | Map      | getCurrentMap()   |                                     |
   |          |                   |                                     |
