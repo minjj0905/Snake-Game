@@ -6,11 +6,16 @@
 
 class Level {
 public:
+    /*현재 맵의 인덱스*/
     int currentLevel;
+    
+    /*Map 객체 array*/
     Map* maps;
+
 
     /*생성자*/
     Level();
+
     /*현재 레벨을 가져온다*/
     int getCurrentLevel();
 
