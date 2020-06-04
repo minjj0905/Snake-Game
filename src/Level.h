@@ -1,3 +1,6 @@
+#ifndef __LEVEL__
+#define __LEVEL__
+
 #include <iostream>
 #include <Map.h>
 
@@ -17,3 +20,4 @@ public:
     /*레벨에 따른 현재 맵을 가져온다.*/
     Map getCurrentMap();
 };
+#endif

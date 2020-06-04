@@ -1,3 +1,6 @@
+#ifndef __MAP__
+#define __MAP__
+
 #include <iostream>
 #include <vector>
 
@@ -25,3 +28,4 @@ public:
     /*값으로 좌표 불러오기*/
     std::vector<int> getMapPos(int value);
 };
+#endif
