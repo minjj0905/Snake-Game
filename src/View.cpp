@@ -1,11 +1,11 @@
 #include "View.h"
-#include <locale.h>
 
 View::View() {
     Init();
 }
 
 void View::Init() {
+    setlocale(LC_ALL, "");
     initscr();
 
     resize_term(30, 60);
@@ -15,7 +15,7 @@ void View::Init() {
 
     border(ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE,
             ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
-    init_pair(1, COLOR_BLACK, COLOR_WHITE);
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
     init_pair(2, COLOR_YELLOW, COLOR_BLACK);
     bkgd(COLOR_PAIR(2));
 }
@@ -32,12 +32,16 @@ void View::DrawGame() {
     wbkgd(gameWin, COLOR_PAIR(2));
     wattron(gameWin, COLOR_PAIR(2));
 
+    wborder(gameWin, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE,
+            ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
     mvwaddch(gameWin, 1, 1, 96|A_ALTCHARSET);
 
-    setlocale(LC_ALL, "");
-    mvwprintw(gameWin, 3, 3, "\u25A0");
-    mvwprintw(gameWin, 3, 5, "되냐");
-    wborder(gameWin, '~','~','~','~','~','~','~','~');
+    mvwprintw(gameWin, 3, 3, "\u25A0\u25A0\u25A0\u25A0 \u274C \u2665 \u2721 \u273A");
+    wattron(gameWin, COLOR_PAIR(1));
+    mvwaddstr(gameWin, 4, 3, "\u2588\u2588\u2588\u2588\u2588 \u266C \u266B \u266A \u2B50");
+    mvwaddch(gameWin, 5, 3, ACS_CKBOARD);
+    
 
     int map[21][21] = {
     {2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2},
@@ -87,6 +91,7 @@ void View::DrawGame() {
     // }
     refresh();
     wrefresh(gameWin);
+    refresh();
 }
 
 /* 테스트용 코드 */

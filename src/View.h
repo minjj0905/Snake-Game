@@ -1,7 +1,8 @@
 #ifndef __VIEW__
 #define __VIEW__
 
-#include <ncursesw/curses.h>
+#include <clocale>
+#include <ncursesw/ncurses.h>
 
 class View {
 public:
