@@ -2,7 +2,7 @@
 #define __LEVEL__
 
 #include <iostream>
-#include <Map.h>
+#include "Map.h"
 
 class Level {
 public:
@@ -10,7 +10,7 @@ public:
     int currentLevel;
     
     /*Map 객체 array*/
-    Map* maps;
+    Map maps[4];
 
 
     /*생성자*/
@@ -24,5 +24,8 @@ public:
 
     /*레벨에 따른 현재 맵을 가져온다.*/
     Map getCurrentMap();
+
+    /*Map 객체 array에 맵을 넣는다.*/
+    void createMap();
 };
 #endif

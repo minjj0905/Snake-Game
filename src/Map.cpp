@@ -1,16 +1,22 @@
 #include <iostream>
 #include <fstream>
-#include <Map.h>
+#include "Map.h"
 using namespace std;
 
-#define LevelDir "./levels/"
+#define LevelDir "../levels/"
 #define file "level"
 
+Map::Map() {}
+
 Map::Map(int stage) {
+    cout << "Map create" << endl;
     mapPath = (string)LevelDir + file + to_string(stage) + ".txt";
+    loadMap();
 }
 
 void Map::loadMap() {
+    cout << "loadMap" << endl;
+    cout << mapPath << endl;
     ifstream in(mapPath);
     in >> mapHeight >> mapWidth;
     map = new int *[mapHeight];

@@ -7,16 +7,19 @@
 class Map {
 public:
     /*map의 y축 길이*/
-    int mapHeight;
+    int mapHeight = 0;
 
     /*map의 x축 길이*/
-    int mapWidth;
+    int mapWidth = 0;
 
     int **map;
 
     /*map file의 경로*/
     std::string mapPath;
 
+
+    /*기본 생성자*/
+    Map();
 
     /*생성자*/
     Map(int stage);
