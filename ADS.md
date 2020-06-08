@@ -58,7 +58,7 @@
   | int     | getCurrentLevel() |                                     |
   | void     | upCurrentLevel()  |                                     |
   | Map      | getCurrentMap()   |                                     |
-  |          |                   |                                     |
+  | void     | createMap()              | Map객체 array에 맵을 넣는다.                                    |
 
 - Snake
 
