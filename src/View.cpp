@@ -38,14 +38,14 @@ void View::drawMainWindow() {
 void View::drawGameWindow(Map map) {
     gameWindow = newwin(25, 50, 5, 2);
     wbkgd(gameWindow, COLOR_PAIR(2));
-    wattron(gameWindow, COLOR_PAIR(2));
+    wattron(gameWindow, COLOR_PAIR(1));
 
     int margin = 2;
 
-     for(int i=0; i<21; i++) {
-        for(int j=0; j<21; j++) {
+     for(int i=0; i<map.mapHeight; i++) {
+        for(int j=0; j<map.mapWidth; j++) {
             int pos = map.getMapValue(i, j);
-            wattron(gameWindow, COLOR_PAIR(2));
+            wattron(gameWindow, COLOR_PAIR(1));
             if(pos == 0) {
                 wattron(gameWindow, COLOR_PAIR(4));
                 mvwprintw(gameWindow, margin+i, margin+j, "\u2B1B");
@@ -54,9 +54,11 @@ void View::drawGameWindow(Map map) {
                 mvwprintw(gameWindow, margin+i, margin+j, "\u2B1B");
             }
             else if(pos == 3) {
+                wattron(gameWindow, COLOR_PAIR(2));
                 mvwprintw(gameWindow, margin+i, margin+j, "\u25CF");
             }
             else if(pos == 4) {
+                wattron(gameWindow, COLOR_PAIR(2));
                 mvwprintw(gameWindow, margin+i, margin+j, "\u25CB");
             }
         }
