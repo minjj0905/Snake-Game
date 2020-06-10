@@ -5,7 +5,7 @@ View::View() {
     setlocale(LC_ALL, "");
     initscr();
 
-    resize_term(35, 100);
+    resize_term(WINDOW_HEIGHT, WINDOW_WIDTH);
     noecho();
     curs_set(0); 
     start_color();
@@ -16,6 +16,10 @@ View::View() {
     init_pair(4, COLOR_BLACK, COLOR_BLACK);
     
     bkgd(COLOR_PAIR(1));
+}
+
+void View::drawStartScreen(){
+    mvprintw(10, 10, "게임을 시작하려면 아무키나 누르세요");
 }
 
 void View::draw(Map map, Snake snake) {
@@ -66,7 +70,6 @@ void View::drawGameWindow(Map map) {
 }
 
 void View::drawScoreWindow(Snake snake) {
-    /*미개발*/
     return;
 }
 
@@ -75,15 +78,15 @@ void View::drawBorder() {
 }
 
 /* 테스트용 코드, mainlogic 간단한 버전이라고 보면 될 듯*/
-int main() {
-    Level lv;
-    lv.createMap();
-    Snake snake;
-    View test;
-    Map map = lv.getCurrentMap();
-    test.draw(map, snake);
-    getch();
-    delwin(test.gameWindow);
-    endwin();
-}
+// int main() {
+//     Level lv;
+//     lv.createMap();
+//     Snake snake;
+//     View test;
+//     Map map = lv.getCurrentMap();
+//     test.draw(map, snake);
+//     getch();
+//     delwin(test.gameWindow);
+//     endwin();
+// }
 /* 테스트 끝 */
