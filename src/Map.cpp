@@ -9,14 +9,11 @@ using namespace std;
 Map::Map() {}
 
 Map::Map(int stage) {
-    cout << "Map create" << endl;
     mapPath = (string)LevelDir + file + to_string(stage) + ".txt";
     loadMap();
 }
 
 void Map::loadMap() {
-    cout << "loadMap" << endl;
-    cout << mapPath << endl;
     ifstream in(mapPath);
     in >> mapHeight >> mapWidth;
     map = new int *[mapHeight];
@@ -47,4 +44,17 @@ vector<int> Map::getMapPos(int value) {
         }
     }
     return v;
+}
+
+void Map::setSnakeZero() {
+    for (int i = 0; i < mapHeight; i++) {
+        for (int j = 0;j < mapWidth; j++) {
+            if (map[i][j] == 3) {
+                map[i][j] = 0;
+            }
+            if (map[i][j] == 4) {
+                map[i][j] = 0;
+            }
+        }
+    }
 }

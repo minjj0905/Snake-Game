@@ -13,7 +13,7 @@ public:
     Map maps[4];
 
 
-    /*생성자*/
+    /*생성자 currentLevel을 0으로 초기화*/
     Level();
 
     /*현재 레벨을 가져온다*/

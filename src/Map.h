@@ -35,5 +35,8 @@ public:
 
     /*값으로 좌표 불러오기*/
     std::vector<int> getMapPos(int value);
+
+    /*갖고온 스네이크 좌표를 0으로 바꿈*/
+    void setSnakeZero();
 };
 #endif

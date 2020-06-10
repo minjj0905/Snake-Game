@@ -3,21 +3,25 @@
 
 #include <iostream>
 #include <vector>
+#include "Level.h"
+
+struct POSITION {
+    int x, y;
+    POSITION(int y, int x);
+    POSITION();
+};
 
 class Snake {
 public:
-    
-    /*길이*/
-    int length = 3;
+    Snake();
 
-    /*머리 좌표*/
-    std::vector<int> headPos;
+    Snake(Level& lv);
 
-    /*몸통 좌표*/
-    std::vector<std::vector<int>> bodyPos;
+    /*스네이크의 좌표*/
+    std::vector<POSITION> snakePos;
 
     /*방향*/
-    char direction;
+    char direction = 'l';
 
     /*grow Item 먹은 횟수*/
     int growCount = 0;
@@ -28,6 +32,8 @@ public:
     /*snake의 생사여부*/
     bool fail = false;
 
+    /*처음 시작할때 스네이크의 좌표를 맵에서 받아냄*/
+    void initSnake(Level& lv);
 
     /*snake의 생사 여부 반환*/
     bool isFailed();
@@ -43,5 +49,10 @@ public:
 
     /*snake가 죽음*/
     void setFailed();
+
+    /*키를 받고 snake 방향전환함*/
+    void moveSnake();
 };
 #endif
+
+/*움직이는 것처럼 보이게 하는게 머리 한칸 옮기고 반영, 꼬리한칸 없애고 반영 move()를 사용할 수 있는가*/
