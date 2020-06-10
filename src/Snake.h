@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Level.h"
+#include "Map.h"
 
 struct POSITION {
     int x, y;
@@ -14,8 +14,6 @@ struct POSITION {
 class Snake {
 public:
     Snake();
-
-    Snake(Level& lv);
 
     /*스네이크의 좌표*/
     std::vector<POSITION> snakePos;
@@ -33,7 +31,7 @@ public:
     bool fail = false;
 
     /*처음 시작할때 스네이크의 좌표를 맵에서 받아냄*/
-    void initSnake(Level& lv);
+    void initSnake(Map& m);
 
     /*snake의 생사 여부 반환*/
     bool isFailed();
