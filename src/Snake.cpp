@@ -11,7 +11,19 @@ POSITION::POSITION() {
     y = 0;
 }
 
-Snake::Snake() {}
+Snake::Snake(Map& m) {
+    for (int i = 0; i < m.mapHeight; i++) {
+        for (int j = 0; j < m.mapWidth; j++) {
+            if (m.map[i][j] == 3) {
+                snakePos.push_back(POSITION(i, j));
+                m.map[i][j] = 0;
+            } else if (m.map[i][j] == 4) {
+                snakePos.push_back(POSITION(i, j));
+                m.map[i][j] = 0;
+            }
+        }
+    }
+}
 
 bool Snake::isFailed() {
     return fail;
@@ -31,18 +43,6 @@ int Snake::getLength() {
 
 void Snake::setFailed() {
     fail = true;
-}
-
-void Snake::initSnake(Map& m) {
-    for (int i = 0; i < m.mapHeight; i++) {
-        for (int j = 0; j < m.mapWidth; j++) {
-            if (m.map[i][j] == 3) {
-                snakePos.push_back(POSITION(i, j));
-            } else if (m.map[i][j] == 4) {
-                snakePos.push_back(POSITION(i, j));
-            }
-        }
-    }
 }
 
 void Snake::moveSnake() {
@@ -96,12 +96,3 @@ void Snake::moveSnake() {
         snakePos.pop_back();
     }
 }
-
-// int main() {
-//     Snake s = Snake();
-//     s.initSnake(l);
-//     cout << "snakePos vector" << endl;
-//     for (int i = 0; i < s.snakePos.size(); i++) {
-//         cout << s.snakePos[i].y << " " << s.snakePos[i].x << endl;
-//     }
-// }

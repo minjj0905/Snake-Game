@@ -12,7 +12,7 @@ struct POSITION {
 
 class Snake {
 public:
-    Snake();
+    Snake(Map& m);
 
     /*스네이크의 좌표*/
     std::vector<POSITION> snakePos;
@@ -28,9 +28,6 @@ public:
 
     /*snake의 생사여부*/
     bool fail = false;
-
-    /*처음 시작할때 스네이크의 좌표를 맵에서 받아냄*/
-    void initSnake(Map& m);
 
     /*snake의 생사 여부 반환*/
     bool isFailed();
