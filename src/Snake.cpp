@@ -1,8 +1,5 @@
-#include <iostream>
-#include <vector>
 #include <ncurses.h>
 #include "Snake.h"
-using namespace std;
 
 POSITION::POSITION(int row, int col) {
     x = col;

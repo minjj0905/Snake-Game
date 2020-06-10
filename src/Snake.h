@@ -1,7 +1,6 @@
 #ifndef __SNAKE__
 #define __SNAKE__
 
-#include <iostream>
 #include <vector>
 #include "Map.h"
 

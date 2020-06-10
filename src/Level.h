@@ -1,7 +1,6 @@
 #ifndef __LEVEL__
 #define __LEVEL__
 
-#include <iostream>
 #include "Map.h"
 
 class Level {
@@ -11,7 +10,6 @@ public:
     
     /*Map 객체 array*/
     Map maps[4];
-
 
     /*생성자 currentLevel을 0으로 초기화*/
     Level();
