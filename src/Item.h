@@ -19,10 +19,10 @@ public :
     Item();
     
     /*맵에 나와있는 아이템의 전체 갯수*/
-    int itemCount;
+    int itemCount = 0;
 
     /*아이템의 타입 grow, poison*/
-    string itemType;
+    string itemType = "";
 
     /*grow 아이템의 정보를 갖게한다.*/
     void growItem(int y, int x);
