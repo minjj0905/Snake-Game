@@ -96,3 +96,7 @@ void Snake::moveSnake() {
         snakePos.pop_back();
     }
 }
+
+std::vector<POSITION> Snake::getPosition() {
+    return snakePos;
+}

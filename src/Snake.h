@@ -12,6 +12,8 @@ struct POSITION {
 
 class Snake {
 public:
+
+    Snake() {};
     Snake(Map& m);
 
     /*스네이크의 좌표*/
@@ -46,6 +48,9 @@ public:
 
     /*키를 받고 snake 방향전환함*/
     void moveSnake();
+
+    /* Snake Position */
+    std::vector<POSITION> getPosition();
 };
 #endif
 
