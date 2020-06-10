@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <math.h>
 #include <string>
+#include <unistd.h>
 #include <iostream>
 using namespace std;
 
@@ -11,11 +12,12 @@ void Game::newGame() {
     level.createMap();
 
     keypad(stdscr, TRUE);
-    nodelay(stdscr, TRUE);
 
     view.drawStartScreen();
     getch();
-    clear();
+
+    nodelay(stdscr, TRUE);
+    cbreak();
 }
 
 void Game::runGame() {
@@ -24,22 +26,24 @@ void Game::runGame() {
 }
 
 void Game::runLevel() {
-    double tick = 0;
-    int key;
-    curMap = level.getCurrentMap();
-    view.draw(curMap, curSnake);    
-
     timer.startTimer();
+    int tick = 0;
+    int count = 0;
+
+    curMap = level.getCurrentMap();
+    curSnake = Snake(curMap);
+    view.draw(curMap, curSnake);
+
     while(1) {
         timer.updateTime();
-        tick = timer.getTick();
-        key = getch();
-        if(key == KEY_DOWN) break;
-        if(fmod(tick, 0.5) == 0) {
-            mvprintw(4, 80, to_string(tick).c_str());
+        double a = timer.getTick();
+        if(a > 0.5) {
+            curSnake.moveSnake();
+            view.draw(curMap, curSnake);
+            timer.startTimer();
         }
-        refresh();
     }
+    
 }
 
 // Test

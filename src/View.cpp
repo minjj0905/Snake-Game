@@ -1,5 +1,6 @@
 #include <clocale>
 #include "View.h"
+#include <string>
 
 View::View() {
     setlocale(LC_ALL, "");
@@ -20,15 +21,16 @@ View::View() {
 
 void View::drawStartScreen(){
     mvprintw(10, 10, "게임을 시작하려면 아무키나 누르세요");
+    refresh();
 }
 
 void View::draw(Map map, Snake snake) {
     drawMainWindow();
     drawGameWindow(map);
+    drawSnake(snake);
     drawScoreWindow(snake);
     drawBorder();
-    refresh();
-    wrefresh(gameWindow);
+    update();
 }
 
 void View::drawMainWindow() {
@@ -56,17 +58,25 @@ void View::drawGameWindow(Map map) {
             else if(pos == 1 || pos == 2) {
                 mvwprintw(gameWindow, margin+i, margin+j, "\u2B1B");
             }
-            else if(pos == 3) {
-                wattron(gameWindow, COLOR_PAIR(2));
-                mvwprintw(gameWindow, margin+i, margin+j, "\u25CF");
-            }
-            else if(pos == 4) {
-                wattron(gameWindow, COLOR_PAIR(2));
-                mvwprintw(gameWindow, margin+i, margin+j, "\u25CB");
-            }
+
         }
     }
+}
 
+void View::drawSnake(Snake snake) {
+    int margin = 2;
+    std::vector<POSITION> snakepos = snake.getPosition();
+
+    wattron(gameWindow, COLOR_PAIR(2));
+    
+    //head
+    mvwprintw(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, "\u25CF");
+
+    //body
+    for(int i=1; i<snake.getLength(); i++) {
+        POSITION pos = snakepos[i];
+        mvwprintw(gameWindow, margin+pos.y, margin+pos.x, "\u25CB");
+    }
 }
 
 void View::drawScoreWindow(Snake snake) {
@@ -77,6 +87,10 @@ void View::drawBorder() {
     border(0, 0, 0, 0, 0, 0, 0, 0);
 }
 
+void View::update()  {
+    refresh();
+    wrefresh(gameWindow);
+}
 /* 테스트용 코드, mainlogic 간단한 버전이라고 보면 될 듯*/
 // int main() {
 //     Level lv;

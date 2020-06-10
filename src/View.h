@@ -32,6 +32,9 @@ public:
     /* gameWindow 그리기 */
     void drawGameWindow(Map map);
 
+    /* 화면에 Snake 그리기 */
+    void drawSnake(Snake snake);
+
     /* 화면에 ScoreBoard 그리기 */
     void drawScoreWindow(Snake snake);
 
