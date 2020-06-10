@@ -1,6 +1,7 @@
 #ifndef __VIEW__
 #define __VIEW__
 
+#include <ncursesw/ncurses.h>
 #include "Level.h"
 #include "Snake.h"
 
