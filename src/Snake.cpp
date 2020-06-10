@@ -52,20 +52,32 @@ void Snake::moveSnake() {
             if (direction != 'r') {
                 direction = 'l';
                 break;
+            } else {
+                setFailed();
+                break;
             }
         case KEY_RIGHT:
             if (direction != 'l') {
                 direction = 'r';
+                break;
+            } else {
+                setFailed();
                 break;
             }
         case KEY_UP:
             if (direction != 'd') {
                 direction = 'u';
                 break;
+            } else {
+                setFailed();
+                break;
             }
         case KEY_DOWN:
             if (direction != 'u') {
                 direction = 'd';
+                break;
+            } else {
+                setFailed();
                 break;
             }
     }
