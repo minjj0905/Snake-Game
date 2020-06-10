@@ -1,5 +1,4 @@
 #include <clocale>
-#include <ncursesw/ncurses.h>
 #include "View.h"
 
 View::View() {
