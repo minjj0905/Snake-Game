@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-// #include <ncurses.h>
+#include <ncurses.h>
 #include "Snake.h"
 using namespace std;
 
