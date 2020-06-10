@@ -2,6 +2,7 @@
 #define __VIEW__
 
 #include <ncursesw/ncurses.h>
+#include "Constant.h"
 #include "Level.h"
 #include "Snake.h"
 
@@ -13,7 +14,16 @@ public:
     /* Initialize */
     View();
 
-    /* 화면을 그림 */
+    /* 게임 시작 화면 */
+    void drawStartScreen();
+
+    /* 게임 오버 화면 */
+    void drawGameOver();
+
+    /* 게임 클리어 화면 */
+    void drawGameClear();
+
+    /* 메인 플레이 화면을 그림 */
     void draw(Map map, Snake snake);
 
     /* MainWindow 그리기 */

@@ -7,10 +7,12 @@ public:
     clock_t currentTime;
     double tick;
 
-    /* Timer 생성시 startTime 기록*/ 
-    Timer();
+    Timer() {};
     
     ~Timer() {};
+
+    /* Timer 시작 */
+    void startTimer();
 
     /* Timer 리셋 */
     void resetTimer();
