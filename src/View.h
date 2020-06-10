@@ -1,31 +1,34 @@
 #ifndef __VIEW__
 #define __VIEW__
 
-#include <clocale>
-#include <ncursesw/ncurses.h>
+#include "Level.h"
+#include "Snake.h"
 
 class View {
 public:
-    WINDOW *gameWin;
-    WINDOW *scoreWin;
-
-    /* 생성자 */
-    View();
+    WINDOW *gameWindow;
+    WINDOW *scoreWindow;
 
     /* Initialize */
-    void Init();
+    View();
 
     /* 화면을 그림 */
-    // void Draw();
+    void draw(Map map, Snake snake);
 
-    /* 화면에 Game 그리기 */
-    void DrawGame();
+    /* MainWindow 그리기 */
+    void drawMainWindow();
+
+    /* gameWindow 그리기 */
+    void drawGameWindow(Map map);
 
     /* 화면에 ScoreBoard 그리기 */
-    // void DrawScore();
+    void drawScoreWindow(Snake snake);
+
+    /* Window Border */
+    void drawBorder();
 
     /* View를 업데이트 */
-    // void Update();    
+    void update();    
 };
 
 #endif
