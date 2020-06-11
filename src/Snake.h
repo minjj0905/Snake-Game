@@ -19,6 +19,9 @@ public:
     /*스네이크의 좌표*/
     std::vector<POSITION> snakePos;
 
+    /*grow아이템을 위한 꼬리*/
+    std::vector<POSITION> tailPos;
+
     /*방향*/
     char direction;
 
@@ -28,8 +31,17 @@ public:
     /*poison Item 먹은 횟수*/
     int poisonCount;
 
+    /*Snake의 maxLength저장*/
+    int maxLength;
+
+    /*Snake의 currentLength저장*/
+    int curLength;
+
     /*snake의 생사여부*/
     bool fail;
+
+    /*Snake의 maxLength 갱신*/
+    void setMaxLength();
 
     /*snake의 생사 여부 반환*/
     bool isFailed();
@@ -47,6 +59,9 @@ public:
     void setFailed();
 
     /*키를 받고 snake 방향전환함*/
+    void setDirection();
+
+    /*snake를 움직임*/
     void moveSnake();
 
     /* 스네이크 head 위치가 올바른지 확인 */
@@ -57,7 +72,14 @@ public:
 
     /* Snake Position */
     std::vector<POSITION> getPosition();
+
+    /*snake가 grow 아이템먹었을때 길이 증가*/
+    void eatGrowItem();
+
+    /*snake가 grow 아이템먹었을때 길이 감소*/
+    void eatPoisonItem();
+
+    /*snake의 curLength를 설정*/
+    void setCurLength();
 };
 #endif
-
-/*움직이는 것처럼 보이게 하는게 머리 한칸 옮기고 반영, 꼬리한칸 없애고 반영 move()를 사용할 수 있는가*/

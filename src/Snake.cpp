@@ -13,6 +13,11 @@ POSITION::POSITION() {
 
 Snake::Snake(Map& m) {
     direction = 'l';
+    maxLength = 3;
+    curLength = 3;
+    growCount = 0;
+    poisonCount = 0;
+    fail = false;
     for (int i = 0; i < m.mapHeight; i++) {
         for (int j = 0; j < m.mapWidth; j++) {
             if (m.map[i][j] == 3) {
@@ -46,7 +51,7 @@ void Snake::setFailed() {
     fail = true;
 }
 
-void Snake::moveSnake() {
+void Snake::setDirection() {
     int KeyPressed = getch();
     switch(KeyPressed) {
         case KEY_LEFT:
@@ -82,18 +87,28 @@ void Snake::moveSnake() {
                 break;
             }
     }
+}
 
+void Snake::moveSnake() {
     if (direction == 'l') {
         snakePos.insert(snakePos.begin(), POSITION(snakePos[0].y, snakePos[0].x - 1));
+        tailPos.pop_back();
+        tailPos.push_back(POSITION(snakePos[snakePos.size()-1].y, snakePos[snakePos.size()-1].x));
         snakePos.pop_back();
     } else if (direction == 'r') {
         snakePos.insert(snakePos.begin(), POSITION(snakePos[0].y, snakePos[0].x + 1));
+        tailPos.pop_back();
+        tailPos.push_back(POSITION(snakePos[snakePos.size()-1].y, snakePos[snakePos.size()-1].x));
         snakePos.pop_back();
     } else if (direction == 'u') {
         snakePos.insert(snakePos.begin(), POSITION(snakePos[0].y - 1, snakePos[0].x));
+        tailPos.pop_back();
+        tailPos.push_back(POSITION(snakePos[snakePos.size()-1].y, snakePos[snakePos.size()-1].x));
         snakePos.pop_back();
     } else if (direction == 'd') {
         snakePos.insert(snakePos.begin(), POSITION(snakePos[0].y + 1, snakePos[0].x));
+        tailPos.pop_back();
+        tailPos.push_back(POSITION(snakePos[snakePos.size()-1].y, snakePos[snakePos.size()-1].x));
         snakePos.pop_back();
     }
 
@@ -101,6 +116,7 @@ void Snake::moveSnake() {
     checkCorrectPos();
     checkLength();
 }
+
 
 void Snake::checkCorrectPos() {
     POSITION headpos = snakePos[0];
@@ -118,4 +134,30 @@ void Snake::checkLength() {
 
 std::vector<POSITION> Snake::getPosition() {
     return snakePos;
+}
+
+void Snake::setMaxLength() {
+    if (getLength() > maxLength) {
+        maxLength = getLength();
+    }
+}
+
+void Snake::eatGrowItem() {
+    int x = tailPos[tailPos.size()-1].x;
+    int y = tailPos[tailPos.size()-1].y;
+    snakePos.push_back(POSITION(y, x));
+    setMaxLength();
+    curLength++;
+    growCount++;
+}
+
+void Snake::eatPoisonItem() {
+    snakePos.pop_back();
+    curLength--;
+    poisonCount++;
+    checkLength();
+}
+
+void Snake::setCurLength() {
+    curLength = getLength();
 }
