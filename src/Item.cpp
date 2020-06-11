@@ -7,18 +7,25 @@ POSITION::POSITION(int row, int col) {
     y = row;
 }
 
-Item::Item(Map& m, int type, int y, int x) {
+Item::Item(Map m, Snake s) {
     srand((unsigned int) time(0));
-    if (m.map[rand() % m.mapHeight][rand() % m.mapWidth] == 0) {
+    int errcnt = 0;
+    for (int i = 0; i < s.snakePos.size(); i++) {
+        if ((s.snakePos[i].y == rand() % m.mapHeight + 1) || (s.snakePos[i].x == rand() % m.mapWidth + 1)) {
+            errcnt++;
+        }
+    }
+    if ((m.map[rand() % m.mapHeight + 1][rand() % m.mapWidth + 1] == 0) && errcnt == 0) {
         if (rand() % 2 == 0) {
-            pos = POSITION(y, x);
+            pos = POSITION(rand() % m.mapHeight + 1, rand() % m.mapWidth + 1);
             itemType = 0;
         } else {
-            pos = POSITION(y, x);
+            pos = POSITION(rand() % m.mapHeight + 1, rand() % m.mapWidth + 1);
             itemType = 1;
         }
     }
 }
+
 POSITION Item::getItemPos() {
     return pos;
 }

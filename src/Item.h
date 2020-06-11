@@ -6,6 +6,7 @@
 #include <ctime>
 #include <vector>
 #include "Map.h"
+#include "Snake.h"
 
 struct POSITION {
     int x, y;
@@ -18,7 +19,7 @@ public :
 
     Item() {};
 
-    Item(Map& m, int type, int y, int x);
+    Item(Map m, Snake s);
 
     POSITION pos;
 
