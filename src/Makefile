@@ -2,13 +2,13 @@ CC = g++
 CCFLAGS = -g
 
 Main: Game.o Level.o Map.o Snake.o Timer.o View.o
-	$(CC) $(CCFLAGS) -o Main Game.o Level.o Map.o Snake.o Timer.o View.o -lncursesw
+	$(CC) $(CCFLAGS) -std=c++11 -o Main Game.o Level.o Map.o Snake.o Timer.o View.o -lncursesw
 
 %.o : %.cpp %.h
-	$(CC) $(CCFLAGS) -c $< -lncursesw
+	$(CC) $(CCFLAGS) -std=c++11 -c $< -lncursesw
 
 %.o : %.cpp
-	$(CC) $(CCFLAGS) -c $< -lncursesw
+	$(CC) $(CCFLAGS) -std=c++11 -c $< -lncursesw
 
 % : %.cpp
-	$(CC) $(CCFLAGS) -o $@ $< -lncursesw
+	$(CC) $(CCFLAGS) -std=c++11 -o $@ $< -lncursesw

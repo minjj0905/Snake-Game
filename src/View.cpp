@@ -1,6 +1,7 @@
 #include <clocale>
 #include "View.h"
 #include <string>
+#include <wchar.h>
 
 View::View() {
     setlocale(LC_ALL, "");
@@ -53,6 +54,7 @@ void View::drawGameWindow(Map map) {
     wattron(gameWindow, COLOR_PAIR(1));
 
     int margin = 2;
+    wchar_t block[] = L"■";
 
      for(int i=0; i<map.mapHeight; i++) {
         for(int j=0; j<map.mapWidth; j++) {
@@ -60,10 +62,10 @@ void View::drawGameWindow(Map map) {
             wattron(gameWindow, COLOR_PAIR(1));
             if(pos == 0) {
                 wattron(gameWindow, COLOR_PAIR(4));
-                mvwprintw(gameWindow, margin+i, margin+j, "\u2B1B");
+                mvwaddwstr(gameWindow, margin+i, margin+j, block);
             }
             else if(pos == 1 || pos == 2) {
-                mvwprintw(gameWindow, margin+i, margin+j, "\u2B1B");
+                mvwaddwstr(gameWindow, margin+i, margin+j, block);
             }
 
         }
@@ -75,14 +77,16 @@ void View::drawSnake(Snake snake) {
     std::vector<POSITION> snakepos = snake.getPosition();
 
     wattron(gameWindow, COLOR_PAIR(2));
-    
+    wchar_t block[] = L"■";
+
     //head
-    mvwprintw(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, "\u25CF");
+    mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, block);
 
     //body
     for(int i=1; i<snake.getLength(); i++) {
         POSITION pos = snakepos[i];
-        mvwprintw(gameWindow, margin+pos.y, margin+pos.x, "\u25CB");
+        wattron(gameWindow, COLOR_PAIR(3));
+        mvwaddwstr(gameWindow, margin+pos.y, margin+pos.x, block);
     }
 }
 
