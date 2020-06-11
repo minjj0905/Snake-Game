@@ -8,22 +8,34 @@ POSITION::POSITION(int row, int col) {
 }
 
 Item::Item(Map m, Snake s) {
-    srand((unsigned int) time(0));
-    int errcnt = 0;
-    for (int i = 0; i < s.snakePos.size(); i++) {
-        if ((s.snakePos[i].y == rand() % m.mapHeight + 1) || (s.snakePos[i].x == rand() % m.mapWidth + 1)) {
-            errcnt++;
-        }
+    setItemPos(m);
+    while (missSnakePos(s)) {
+        setItemPos(m);
     }
-    if ((m.map[rand() % m.mapHeight + 1][rand() % m.mapWidth + 1] == 0) && errcnt == 0) {
+}
+
+void Item::setItemPos(Map m) {
+    srand((unsigned int)time(0));
+    int x = rand() % (m.mapWidth + 1);
+    int y = rand() % (m.mapHeight + 1);
+    if (m.map[y][x] == 0) {
         if (rand() % 2 == 0) {
-            pos = POSITION(rand() % m.mapHeight + 1, rand() % m.mapWidth + 1);
+            pos = POSITION(y, x);
             itemType = 0;
         } else {
-            pos = POSITION(rand() % m.mapHeight + 1, rand() % m.mapWidth + 1);
+            pos = POSITION(y, x);
             itemType = 1;
         }
     }
+}
+
+bool Item::missSnakePos(Snake s) {
+    for (int i = 0; i < s.getLength(); i++) {
+        if ((s.snakePos[i].x == pos.x) || (s.snakePos[i].y == pos.y)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 POSITION Item::getItemPos() {
@@ -34,4 +46,3 @@ bool Item::isGrowItem() {
     if(itemType) return false;
     return true;
 }
-
