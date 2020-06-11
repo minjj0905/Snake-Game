@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include <ncursesw/ncurses.h>
 #include "Snake.h"
 
 POSITION::POSITION(int row, int col) {
@@ -96,7 +96,9 @@ void Snake::moveSnake() {
         snakePos.pop_back();
     }
 
+    // 스네이크 fail 체크
     checkCorrectPos();
+    checkLength();
 }
 
 void Snake::checkCorrectPos() {
@@ -109,6 +111,9 @@ void Snake::checkCorrectPos() {
     }
 }
 
+void Snake::checkLength() {
+    if (getLength()<3) setFailed();
+}
 
 std::vector<POSITION> Snake::getPosition() {
     return snakePos;
