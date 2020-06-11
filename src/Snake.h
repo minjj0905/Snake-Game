@@ -52,6 +52,9 @@ public:
     /* 스네이크 head 위치가 올바른지 확인 */
     void checkCorrectPos();
 
+    /* 스네이크 길이가 3 이상인지 확인 */
+    void checkLength();
+
     /* Snake Position */
     std::vector<POSITION> getPosition();
 };
