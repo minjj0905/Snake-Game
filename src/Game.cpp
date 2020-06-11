@@ -31,7 +31,7 @@ void Game::runLevel() {
     curSnake = Snake(curMap);
     view.draw(curMap, curSnake);
 
-    while(1) {
+    while(!isGameOver()) {
         timer.updateTime();
         double a = timer.getTick();
         if(a > 0.5) {
@@ -40,7 +40,26 @@ void Game::runLevel() {
             timer.startTimer();
         }
     }
-    
+    view.drawGameOver();
+}
+
+bool Game::isGameOver() {
+    //Snake 키보드 입력 체크
+    if(curSnake.isFailed()) return true;
+    if(isCollision()) return true;
+
+    return false;
+}
+
+bool Game::isCollision() {
+    POSITION headpos = curSnake.getPosition()[0];
+    int posvalue = curMap.getMapValue(headpos.y, headpos.x);
+    mvprintw(20, 90, std::to_string(posvalue).c_str());
+    mvprintw(21, 90, std::to_string(headpos.y).c_str());
+    mvprintw(22, 90, std::to_string(headpos.x).c_str());
+    if((posvalue == 1) || (posvalue == 2)) return true;
+
+    return false;
 }
 
 // Test

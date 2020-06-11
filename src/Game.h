@@ -21,7 +21,8 @@ public:
     void runLevel();
     void clearGame();
     void event();
-    void isGameOver();
+    bool isGameOver();
+    bool isCollision();
     void isGameClear();
 
 };
