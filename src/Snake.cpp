@@ -95,7 +95,20 @@ void Snake::moveSnake() {
         snakePos.insert(snakePos.begin(), POSITION(snakePos[0].y + 1, snakePos[0].x));
         snakePos.pop_back();
     }
+
+    checkCorrectPos();
 }
+
+void Snake::checkCorrectPos() {
+    POSITION headpos = snakePos[0];
+    for(int i=1; i<getLength(); i++) {
+        POSITION bodypos = snakePos[i];
+        if(bodypos.x == headpos.x && bodypos.y == headpos.y) {
+            setFailed();
+        }
+    }
+}
+
 
 std::vector<POSITION> Snake::getPosition() {
     return snakePos;

@@ -49,6 +49,9 @@ public:
     /*키를 받고 snake 방향전환함*/
     void moveSnake();
 
+    /* 스네이크 head 위치가 올바른지 확인 */
+    void checkCorrectPos();
+
     /* Snake Position */
     std::vector<POSITION> getPosition();
 };
