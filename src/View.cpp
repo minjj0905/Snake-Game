@@ -61,8 +61,8 @@ void View::drawGameWindow(Map map) {
             int pos = map.getMapValue(i, j);
             wattron(gameWindow, COLOR_PAIR(1));
             if(pos == 0) {
-                // wattron(gameWindow, COLOR_PAIR(4));
-                // mvwaddwstr(gameWindow, margin+i, margin+j, block);
+                wattron(gameWindow, COLOR_PAIR(4));
+                mvwaddwstr(gameWindow, margin+i, margin+j, block);
             }
             else if(pos == 1 || pos == 2) {
                 mvwaddwstr(gameWindow, margin+i, margin+j, block);
@@ -77,15 +77,16 @@ void View::drawSnake(Snake snake) {
     std::vector<POSITION> snakepos = snake.getPosition();
 
     wattron(gameWindow, COLOR_PAIR(2));
-    wchar_t circle[] = L"⯁";
+    wchar_t block[] = L"■";
 
     //head
-    mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, circle);
+    mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, block);
 
     //body
     for(int i=1; i<snake.getLength(); i++) {
         POSITION pos = snakepos[i];
-        mvwaddwstr(gameWindow, margin+pos.y, margin+pos.x, circle);
+        wattron(gameWindow, COLOR_PAIR(3));
+        mvwaddwstr(gameWindow, margin+pos.y, margin+pos.x, block);
     }
 }
 
