@@ -24,6 +24,13 @@ void View::drawStartScreen(){
     refresh();
 }
 
+void View::drawGameOver(){
+    clear();
+    nodelay(stdscr, FALSE);
+    mvprintw(10, 10, "Gameover...");
+    getch();
+}
+
 void View::draw(Map map, Snake snake) {
     drawMainWindow();
     drawGameWindow(map);
