@@ -7,13 +7,6 @@ POSITION::POSITION(int row, int col) {
     y = row;
 }
 
-POSITION::POSITION() {
-    x = 0;
-    y = 0;
-}
-
-Item::Item() {};
-
 Item::Item(Map& m, int type, int y, int x) {
     srand((unsigned int) time(0));
     if (m.map[rand() % m.mapHeight][rand() % m.mapWidth] == 0) {
@@ -31,10 +24,7 @@ POSITION Item::getItemPos() {
 }
 
 bool Item::isGrowItem() {
-    if (itemType == 0) {
-        return true;
-    } else {
-        return false;
-    }
+    if(itemType) return false;
+    return true;
 }
 

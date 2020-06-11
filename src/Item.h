@@ -10,13 +10,13 @@
 struct POSITION {
     int x, y;
     POSITION(int y, int x);
-    POSITION();
+    POSITION() {};
 };
 
 class Item {
 public :
 
-    Item();
+    Item() {};
 
     Item(Map& m, int type, int y, int x);
 
