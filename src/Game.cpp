@@ -54,9 +54,9 @@ bool Game::isGameOver() {
 bool Game::isCollision() {
     POSITION headpos = curSnake.getPosition()[0];
     int posvalue = curMap.getMapValue(headpos.y, headpos.x);
-    mvprintw(20, 90, std::to_string(posvalue).c_str());
-    mvprintw(21, 90, std::to_string(headpos.y).c_str());
-    mvprintw(22, 90, std::to_string(headpos.x).c_str());
+    // mvprintw(20, 90, std::to_string(posvalue).c_str());
+    // mvprintw(21, 90, std::to_string(headpos.y).c_str());
+    // mvprintw(22, 90, std::to_string(headpos.x).c_str());
     if((posvalue == 1) || (posvalue == 2)) return true;
 
     return false;
