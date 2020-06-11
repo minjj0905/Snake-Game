@@ -7,10 +7,10 @@
 class Map {
 public:
     /*map의 y축 길이*/
-    int mapHeight = 0;
+    int mapHeight;
 
     /*map의 x축 길이*/
-    int mapWidth = 0;
+    int mapWidth;
 
     int **map;
 

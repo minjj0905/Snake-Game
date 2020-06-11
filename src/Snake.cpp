@@ -12,6 +12,7 @@ POSITION::POSITION() {
 }
 
 Snake::Snake(Map& m) {
+    direction = 'l';
     for (int i = 0; i < m.mapHeight; i++) {
         for (int j = 0; j < m.mapWidth; j++) {
             if (m.map[i][j] == 3) {

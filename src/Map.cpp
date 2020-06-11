@@ -1,5 +1,6 @@
 #include <fstream>
 #include "Map.h"
+#include <string>
 using namespace std;
 
 #define LevelDir "../levels/"

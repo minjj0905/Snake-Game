@@ -20,16 +20,16 @@ public:
     std::vector<POSITION> snakePos;
 
     /*방향*/
-    char direction = 'l';
+    char direction;
 
     /*grow Item 먹은 횟수*/
-    int growCount = 0;
+    int growCount;
 
     /*poison Item 먹은 횟수*/
-    int poisonCount = 0;
+    int poisonCount;
 
     /*snake의 생사여부*/
-    bool fail = false;
+    bool fail;
 
     /*snake의 생사 여부 반환*/
     bool isFailed();
