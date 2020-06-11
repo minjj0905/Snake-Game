@@ -12,48 +12,29 @@ POSITION::POSITION() {
     y = 0;
 }
 
-Item::Item() {
-    int itemCount = 0;
-    string itemType = "";
-}
+Item::Item() {};
 
-void Item::randomItem(Map& m) {
+Item::Item(Map& m, int type, int y, int x) {
     srand((unsigned int) time(0));
-    if ((m.map[rand() % m.mapHeight][rand() % m.mapWidth] == 0) && (itemCount < 3)) {
+    if (m.map[rand() % m.mapHeight][rand() % m.mapWidth] == 0) {
         if (rand() % 2 == 0) {
-            growItem(rand() % m.mapHeight, rand() % m.mapWidth);
-            itemCount++;
+            pos = POSITION(y, x);
+            itemType = 0;
         } else {
-            poisonItem(rand() % m.mapHeight, rand() % m.mapWidth);
-            itemCount++;
+            pos = POSITION(y, x);
+            itemType = 1;
         }
     }
 }
-
-void Item::growItem(int y, int x) {
-    growItemPos.push_back(POSITION(y, x));
-    itemType = "grow";
-}
-
-void Item::poisonItem(int y, int x) {
-    poisonItemPos.push_back(POSITION(y, x));
-    itemType = "poison";
-}
-
 POSITION Item::getItemPos() {
-    if (itemType == "grow" && !growItemPos.empty()) {
-        int xpos = growItemPos[0].x;
-        int ypos = growItemPos[0].y;
-        growItemPos.clear();
-        return POSITION(ypos, xpos);
-    } else if (itemType == "poison" && !poisonItemPos.empty()) {
-        int xpos = poisonItemPos[0].x;
-        int ypos = poisonItemPos[0].y;
-        poisonItemPos.clear();
-        return POSITION(ypos, xpos);
+    return pos;
+}
+
+bool Item::isGrowItem() {
+    if (itemType == 0) {
+        return true;
     } else {
-        return POSITION();
+        return false;
     }
 }
-
 

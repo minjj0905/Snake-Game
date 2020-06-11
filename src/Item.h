@@ -17,28 +17,19 @@ class Item {
 public :
 
     Item();
-    
-    /*맵에 나와있는 아이템의 전체 갯수*/
-    int itemCount = 0;
 
-    /*아이템의 타입 grow, poison*/
-    string itemType = "";
+    Item(Map& m, int type, int y, int x);
 
-    /*grow 아이템의 정보를 갖게한다.*/
-    void growItem(int y, int x);
+    POSITION pos;
 
-    /*poison 아이템의 정보를 갖게한다.*/
-    void poisonItem(int y, int x);
-
-    /*랜덤으로 아이템 생성*/
-    void randomItem(Map& m);
-
-    /*각 아이템들의 좌표*/
-    vector<POSITION> growItemPos;
-    vector<POSITION> poisonItemPos;
+    /*아이템의 타입 grow = 0, poison = 1*/
+    int itemType;
 
     /*각 아이템들의 좌표값을 리턴*/
     POSITION getItemPos();
+
+    /*type이 grow인지 판별*/
+    bool isGrowItem();
 
 };
 #endif
