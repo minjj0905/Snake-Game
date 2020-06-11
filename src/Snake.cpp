@@ -18,6 +18,7 @@ Snake::Snake(Map& m) {
     growCount = 0;
     poisonCount = 0;
     fail = false;
+    tailPos.push_back(POSITION());
     for (int i = 0; i < m.mapHeight; i++) {
         for (int j = 0; j < m.mapWidth; j++) {
             if (m.map[i][j] == 3) {
