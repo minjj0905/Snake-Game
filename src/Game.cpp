@@ -1,9 +1,6 @@
 #include "Game.h"
 #include <math.h>
 #include <string>
-#include <unistd.h>
-#include <iostream>
-using namespace std;
 
 
 void Game::newGame() {
