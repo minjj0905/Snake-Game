@@ -8,10 +8,9 @@ POSITION::POSITION(int row, int col) {
 }
 
 Item::Item(Map m, Snake s) {
-    setItemPos(m);
-    while (missSnakePos(s)) {
+    do {
         setItemPos(m);
-    }
+    } while (missSnakePos(s));
 }
 
 void Item::setItemPos(Map m) {
