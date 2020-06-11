@@ -93,7 +93,7 @@
   | int      | getPoisonCount() | poison Item 먹은 횟수 반환            |
   | int         | getLength()      | snake의 길이 반환            |
   |  void     | setFailed()      | snake가 죽음            |
-  | void | moveSnake() | 키를 받고 snake 방향전환함  |
+  | void | setDirection() | 키를 받고 snake 방향전환함  |
 
 
 
