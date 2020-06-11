@@ -9,7 +9,7 @@ using namespace std;
 Map::Map() {}
 
 Map::Map(int stage) {
-    mapPath = (string)LevelDir + file + std::to_string(stage) + ".txt";
+    mapPath = (string)LevelDir + file + to_string(stage) + ".txt";
     loadMap();
 }
 
