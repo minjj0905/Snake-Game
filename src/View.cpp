@@ -79,8 +79,8 @@ void View::drawSnake(Snake snake) {
     std::vector<POSITION> snakepos = snake.getPosition();
 
     wattron(gameWindow, COLOR_PAIR(2));
-    wchar_t head[] = L"🞙";
-    wchar_t body[] = L"🞙";
+    wchar_t head[] = L"■";
+    wchar_t body[] = L"□";
 
     //head
     mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, head);
@@ -93,8 +93,8 @@ void View::drawSnake(Snake snake) {
 }
 
 void View::drawItem(std::vector<Item> item) {
-    wchar_t growitem[] = L"o";
-    wchar_t poisonitem[] = L"o";
+    wchar_t growitem[] = L"□";
+    wchar_t poisonitem[] = L"□";
 
     int margin = 2;
     for(int i=0; i<item.size(); i++) {
