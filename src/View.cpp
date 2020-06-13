@@ -35,8 +35,8 @@ void View::drawGameOver(){
 
 void View::draw(Map map, Snake snake, std::vector<Item> item) {
     drawMainWindow();
-    drawGameWindow(map);
-    drawSnake(snake);
+    drawGameWindow(map, snake, item);
+    // drawSnake(snake);
     drawItem(item);
     drawScoreWindow(snake);
     drawBorder();
@@ -50,21 +50,34 @@ void View::drawMainWindow() {
     return;
 }
 
-void View::drawGameWindow(Map map) {
+void View::drawGameWindow(Map map, Snake snake, std::vector<Item> item) {
     gameWindow = newwin(25, 50, 5, 2);
     wbkgd(gameWindow, COLOR_PAIR(2));
     wattron(gameWindow, COLOR_PAIR(1));
 
     int margin = 2;
     wchar_t block[] = L"■";
+    wchar_t body[] = L"□";
+
+    std::vector<POSITION> snakepos = snake.getPosition();
 
      for(int i=0; i<map.mapHeight; i++) {
         for(int j=0; j<map.mapWidth; j++) {
             int pos = map.getMapValue(i, j);
             wattron(gameWindow, COLOR_PAIR(1));
             if(pos == 0) {
-                wattron(gameWindow, COLOR_PAIR(4));
-                mvwaddwstr(gameWindow, margin+i, margin+j, block);
+                if((snakepos[0].y == i) && (snakepos[0].x == j)) {
+                    wattron(gameWindow, COLOR_PAIR(2));
+                    mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, block);
+                }
+                else{
+                    for(int k=1; k<snake.getLength(); k++) {
+                        if((snakepos[k].y == i) && (snakepos[k].x == j)) {
+                            wattron(gameWindow, COLOR_PAIR(2));
+                            mvwaddwstr(gameWindow, margin+snakepos[k].y, margin+snakepos[k].x, body);
+                        }
+                    }
+                }
             }
             else if(pos == 1 || pos == 2) {
                 mvwaddwstr(gameWindow, margin+i, margin+j, block);
@@ -93,8 +106,8 @@ void View::drawSnake(Snake snake) {
 }
 
 void View::drawItem(std::vector<Item> item) {
-    wchar_t growitem[] = L"□";
-    wchar_t poisonitem[] = L"□";
+    wchar_t growitem[] = L"■";
+    wchar_t poisonitem[] = L"■";
 
     int margin = 2;
     for(int i=0; i<item.size(); i++) {

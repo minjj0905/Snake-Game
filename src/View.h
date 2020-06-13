@@ -31,7 +31,7 @@ public:
     void drawMainWindow();
 
     /* gameWindow 그리기 */
-    void drawGameWindow(Map map);
+    void drawGameWindow(Map map, Snake, std::vector<Item> item);
 
     /* 화면에 Snake 그리기 */
     void drawSnake(Snake snake);
