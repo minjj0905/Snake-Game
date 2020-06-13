@@ -10,8 +10,8 @@ Item::Item(Map m, Snake s) {
 
 void Item::setItemPos(Map m) {
     srand((unsigned int)time(0));
-    int x = rand() % (m.mapWidth + 1);
-    int y = rand() % (m.mapHeight + 1);
+    int x = (rand() % (m.mapWidth - 1)) + 1;
+    int y = (rand() % (m.mapHeight - 1)) + 1;
     if (m.map[y][x] == 0) {
         if (rand() % 2 == 0) {
             pos = POSITION(y, x);
