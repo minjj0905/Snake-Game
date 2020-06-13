@@ -156,7 +156,6 @@ void Snake::eatPoisonItem() {
     snakePos.pop_back();
     curLength--;
     poisonCount++;
-    checkLength();
 }
 
 void Snake::setCurLength() {
