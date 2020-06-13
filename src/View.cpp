@@ -13,8 +13,9 @@ View::View() {
     start_color();
 
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
-    init_pair(2, COLOR_YELLOW, COLOR_BLACK);
-    init_pair(3, COLOR_GREEN, COLOR_BLACK);
+    init_pair(2, COLOR_CYAN, COLOR_BLACK);
+    init_pair('g', COLOR_GREEN, COLOR_BLACK);
+    init_pair('r', COLOR_RED, COLOR_BLACK);
     init_pair(4, COLOR_BLACK, COLOR_BLACK);
     
     bkgd(COLOR_PAIR(1));
@@ -32,10 +33,11 @@ void View::drawGameOver(){
     getch();
 }
 
-void View::draw(Map map, Snake snake) {
+void View::draw(Map map, Snake snake, std::vector<Item> item) {
     drawMainWindow();
     drawGameWindow(map);
     drawSnake(snake);
+    drawItem(item);
     drawScoreWindow(snake);
     drawBorder();
     update();
@@ -77,16 +79,33 @@ void View::drawSnake(Snake snake) {
     std::vector<POSITION> snakepos = snake.getPosition();
 
     wattron(gameWindow, COLOR_PAIR(2));
-    wchar_t block[] = L"■";
+    wchar_t head[] = L"🞙";
+    wchar_t body[] = L"🞙";
 
     //head
-    mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, block);
+    mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, head);
 
     //body
     for(int i=1; i<snake.getLength(); i++) {
         POSITION pos = snakepos[i];
-        wattron(gameWindow, COLOR_PAIR(3));
-        mvwaddwstr(gameWindow, margin+pos.y, margin+pos.x, block);
+        mvwaddwstr(gameWindow, margin+pos.y, margin+pos.x, body);
+    }
+}
+
+void View::drawItem(std::vector<Item> item) {
+    wchar_t growitem[] = L"o";
+    wchar_t poisonitem[] = L"o";
+
+    int margin = 2;
+    for(int i=0; i<item.size(); i++) {
+        POSITION itempos = item[i].getItemPos();
+        if(item[i].isGrowItem()) {
+            wattron(gameWindow, COLOR_PAIR('g'));
+            mvwaddwstr(gameWindow, itempos.y + margin, itempos.x + margin, growitem);
+        }else{
+            wattron(gameWindow, COLOR_PAIR('r'));
+            mvwaddwstr(gameWindow, itempos.y + margin, itempos.x + margin, poisonitem);
+        }
     }
 }
 

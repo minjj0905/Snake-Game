@@ -8,12 +8,6 @@
 #include "Map.h"
 #include "Snake.h"
 
-struct POSITION {
-    int x, y;
-    POSITION(int y, int x);
-    POSITION() {};
-};
-
 class Item {
 public :
 

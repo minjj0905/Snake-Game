@@ -2,11 +2,6 @@
 #include "Item.h"
 using namespace std;
 
-POSITION::POSITION(int row, int col) {
-    x = col;
-    y = row;
-}
-
 Item::Item(Map m, Snake s) {
     do {
         setItemPos(m);

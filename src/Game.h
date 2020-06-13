@@ -4,16 +4,16 @@
 #include "View.h"
 #include "Timer.h"
 // #include "Gate.h"
-// #include "Item.h"
+#include "Item.h"
 
 class Game {
 public:
     View view;
-    Timer timer;
     Level level;
     Snake curSnake;
     Map curMap;
     int curLv;
+    std::vector<Item> item;
 
     Game() {};
     void newGame();
@@ -23,6 +23,7 @@ public:
     void event();
     bool isGameOver();
     bool isCollision();
+    bool isGetItem();
     void isGameClear();
 
 };
