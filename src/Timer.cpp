@@ -10,8 +10,8 @@ void Timer::startTimer(){
 }
 
 void Timer::resetTimer(){
-    startTime = 0;
-    currentTime = 0;
+    startTime = clock();
+    currentTime = clock();
 }
 
 void Timer::updateTime() {
