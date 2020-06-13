@@ -20,6 +20,20 @@ void Item::setItemPos(Map m) {
             pos = POSITION(y, x);
             itemType = 1;
         }
+    } else {
+        while (m.map[y][x] != 0) {
+            x = (rand() % (m.mapWidth - 1)) + 1;
+            y = (rand() % (m.mapHeight - 1)) + 1;
+            if (m.map[y][x] == 0) {
+                if (rand() % 2 == 0) {
+                    pos = POSITION(y, x);
+                    itemType = 0;
+                } else {
+                    pos = POSITION(y, x);
+                    itemType = 1;
+                }
+            }
+        }
     }
 }
 
