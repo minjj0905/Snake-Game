@@ -33,5 +33,7 @@ public :
     /*type이 grow인지 판별*/
     bool isGrowItem();
 
+    bool operator==(Item& i);
+
 };
 #endif

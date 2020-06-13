@@ -54,3 +54,7 @@ bool Item::isGrowItem() {
     if(itemType) return false;
     return true;
 }
+
+bool Item::operator==(Item& i) {
+    return (pos.x == i.pos.x) && (pos.y == i.pos.y);
+}
