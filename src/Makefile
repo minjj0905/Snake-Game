@@ -12,3 +12,6 @@ Main: Game.o Level.o Map.o Snake.o Timer.o View.o Item.o
 
 % : %.cpp
 	$(CC) $(CCFLAGS) -std=c++11 -o $@ $< -lncursesw
+
+clean :
+	rm *.o Main
