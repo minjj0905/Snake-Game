@@ -58,11 +58,11 @@ void Game::runLevel() {
 
         curSnake.setDirection();
 
-        if(tick > 0.5) {
+        if(tick > 0.4) {
             curSnake.moveSnake();
 
             if(!isGetItem()) {
-                if((erasetime > rand() % 3 + 10) && !item.empty()) {
+                if((erasetime > rand() % 5 + 10) && !item.empty()) {
                     item.erase(item.begin());
                     eraseTimer.startTimer();
                 }
@@ -74,6 +74,9 @@ void Game::runLevel() {
         if(itemtime > rand() % 3 + 4) {
             if(item.size() < 3) {
                 Item newitem = Item(curMap, curSnake);
+                for(int i=0; i<item.size(); i++) {
+                    if(item[i] == newitem) newitem = Item(curMap, curSnake);
+                }
                 item.push_back(newitem);
             }
             itemTimer.startTimer();

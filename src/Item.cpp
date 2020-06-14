@@ -3,9 +3,10 @@
 using namespace std;
 
 Item::Item(Map m, Snake s) {
-    do {
+    for(int i=0; i<200; i++) {
         setItemPos(m);
-    } while (missSnakePos(s));
+        if(!missSnakePos(s)) break;
+    }
 }
 
 void Item::setItemPos(Map m) {
