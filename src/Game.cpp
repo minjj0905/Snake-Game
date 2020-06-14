@@ -62,7 +62,7 @@ void Game::runLevel() {
             curSnake.moveSnake();
 
             if(!isGetItem()) {
-                if((erasetime > rand() % 3 + 7) && !item.empty()) {
+                if((erasetime > rand() % 3 + 10) && !item.empty()) {
                     item.erase(item.begin());
                     eraseTimer.startTimer();
                 }
@@ -71,7 +71,7 @@ void Game::runLevel() {
             tickTimer.startTimer();
         }
 
-        if(itemtime > rand() % 3 + 3) {
+        if(itemtime > rand() % 3 + 4) {
             if(item.size() < 3) {
                 Item newitem = Item(curMap, curSnake);
                 item.push_back(newitem);
