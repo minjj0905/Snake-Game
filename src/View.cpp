@@ -35,8 +35,8 @@ void View::drawGameOver(){
 
 void View::draw(Map map, Snake snake, std::vector<Item> item) {
     drawMainWindow();
-    drawGameWindow(map);
-    drawSnake(snake);
+    drawGameWindow(map, snake, item);
+    // drawSnake(snake);
     drawItem(item);
     drawScoreWindow(snake);
     drawBorder();
@@ -50,7 +50,7 @@ void View::drawMainWindow() {
     return;
 }
 
-void View::drawGameWindow(Map map) {
+void View::drawGameWindow(Map map, Snake snake, std::vector<Item> item) {
     gameWindow = newwin(25, 50, 5, 2);
     wbkgd(gameWindow, COLOR_PAIR(1));
     wattron(gameWindow, COLOR_PAIR(1));
@@ -74,8 +74,8 @@ void View::drawSnake(Snake snake) {
     std::vector<POSITION> snakepos = snake.getPosition();
 
     wattron(gameWindow, COLOR_PAIR(2));
-    wchar_t head[] = L"■";
-    wchar_t body[] = L"□";
+    wchar_t head[] = L" ■";
+    wchar_t body[] = L" □";
 
     //head
     wprintw(gameWindow, " ");
