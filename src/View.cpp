@@ -36,7 +36,7 @@ void View::drawGameOver(){
 void View::draw(Map map, Snake snake, std::vector<Item> item) {
     drawMainWindow();
     drawGameWindow(map, snake, item);
-    // drawSnake(snake);
+    drawSnake(snake);
     drawItem(item);
     drawScoreWindow(snake);
     drawBorder();
