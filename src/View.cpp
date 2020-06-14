@@ -52,22 +52,18 @@ void View::drawMainWindow() {
 
 void View::drawGameWindow(Map map) {
     gameWindow = newwin(25, 50, 5, 2);
-    wbkgd(gameWindow, COLOR_PAIR(2));
+    wbkgd(gameWindow, COLOR_PAIR(1));
     wattron(gameWindow, COLOR_PAIR(1));
-
-    int margin = 2;
-    wchar_t block[] = L"■";
 
      for(int i=0; i<map.mapHeight; i++) {
         for(int j=0; j<map.mapWidth; j++) {
             int pos = map.getMapValue(i, j);
-            wattron(gameWindow, COLOR_PAIR(1));
             if(pos == 0) {
-                wattron(gameWindow, COLOR_PAIR(4));
-                mvwaddwstr(gameWindow, margin+i, margin+j, block);
+                wprintw(gameWindow, "  ");
             }
             else if(pos == 1 || pos == 2) {
-                mvwaddwstr(gameWindow, margin+i, margin+j, block);
+                wprintw(gameWindow, " ");
+                mvwprintw(gameWindow, i, 2*j, "■");
             }
 
         }
@@ -75,7 +71,6 @@ void View::drawGameWindow(Map map) {
 }
 
 void View::drawSnake(Snake snake) {
-    int margin = 2;
     std::vector<POSITION> snakepos = snake.getPosition();
 
     wattron(gameWindow, COLOR_PAIR(2));
@@ -83,28 +78,26 @@ void View::drawSnake(Snake snake) {
     wchar_t body[] = L"□";
 
     //head
-    mvwaddwstr(gameWindow, margin+snakepos[0].y, margin+snakepos[0].x, head);
+    wprintw(gameWindow, " ");
+    mvwprintw(gameWindow, snakepos[0].y, 2*snakepos[0].x, "■");
 
     //body
     for(int i=1; i<snake.getLength(); i++) {
         POSITION pos = snakepos[i];
-        mvwaddwstr(gameWindow, margin+pos.y, margin+pos.x, body);
+        wprintw(gameWindow, " ");
+        mvwprintw(gameWindow, pos.y, 2*pos.x, "□");
     }
 }
 
 void View::drawItem(std::vector<Item> item) {
-    wchar_t growitem[] = L"□";
-    wchar_t poisonitem[] = L"□";
-
-    int margin = 2;
     for(int i=0; i<item.size(); i++) {
         POSITION itempos = item[i].getItemPos();
         if(item[i].isGrowItem()) {
             wattron(gameWindow, COLOR_PAIR('g'));
-            mvwaddwstr(gameWindow, itempos.y + margin, itempos.x + margin, growitem);
+            mvwprintw(gameWindow, itempos.y, 2*itempos.x, "■");
         }else{
             wattron(gameWindow, COLOR_PAIR('r'));
-            mvwaddwstr(gameWindow, itempos.y + margin, itempos.x + margin, poisonitem);
+            mvwprintw(gameWindow, itempos.y, 2*itempos.x, "■");
         }
     }
 }
