@@ -11,6 +11,10 @@ POSITION::POSITION() {
     y = 0;
 }
 
+bool POSITION::operator==(POSITION& p) {
+    return ((x == p.x) && (y == p.y));
+}
+
 Snake::Snake(Map& m) {
     direction = 'l';
     maxLength = 3;

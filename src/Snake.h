@@ -8,6 +8,8 @@ struct POSITION {
     int x, y;
     POSITION(int y, int x);
     POSITION();
+
+    bool operator==(POSITION& p);
 };
 
 class Snake {
