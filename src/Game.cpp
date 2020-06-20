@@ -97,10 +97,15 @@ void Game::runLevel() {
             view.draw(curMap, curSnake, item);
             if(gate.size() < 1) {
                 Gate newgate = Gate(curMap);
+                mvprintw(2, 50, "게이트 생성");
+                view.draw(curMap, curSnake, item);
                 newgate.pos1 = POSITION(0, 1);
                 newgate.pos2 = POSITION(1, 10);
+                mvprintw(2, 60, "포지션 지정");
+                view.draw(curMap, curSnake, item);
                 gate.push_back(newgate);
                 mvprintw(2, 20, "게이트 생김");
+                view.draw(curMap, curSnake, item);
             }
             gateTimer.startTimer();
         }
