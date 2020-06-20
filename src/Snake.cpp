@@ -11,7 +11,7 @@ POSITION::POSITION() {
     y = 0;
 }
 
-bool POSITION::operator==(POSITION& p) {
+bool POSITION::operator==(POSITION p) {
     return ((x == p.x) && (y == p.y));
 }
 
@@ -56,6 +56,20 @@ void Snake::setFailed() {
     fail = true;
 }
 
+bool Snake::isOnGate() {
+    return onGate;
+}
+
+void Snake::usingGate(POSITION p) {
+    onGate = true;
+    gatepos = p;
+}
+
+void Snake::outGate() {
+    onGate = false;
+    gatepos = POSITION(0, 0);
+}
+
 void Snake::setDirection() {
     int KeyPressed = getch();
     switch(KeyPressed) {
@@ -96,6 +110,14 @@ void Snake::setDirection() {
 
 void Snake::makeDirectionThis(char c) {
     direction = c;
+}
+
+char Snake::getDirection() {
+    return direction;
+}
+
+void Snake::setHeadPos(POSITION p) {
+    snakePos[0] = p;
 }
 
 void Snake::moveSnake() {

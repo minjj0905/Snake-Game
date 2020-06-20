@@ -60,6 +60,11 @@ void Gate::setUdlr(Map m) {
     }
 }
 
+int Gate::getUdlr(int posnum, int idx) {
+    if (posnum == 1) return pos1_udlr[idx];
+    else if (posnum == 2) return pos2_udlr[idx];
+}
+
 POSITION Gate::getGatePos(int n) {
     if (n == 1) {
         return pos1;

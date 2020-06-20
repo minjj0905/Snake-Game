@@ -3,7 +3,7 @@
 
 #include "View.h"
 #include "Timer.h"
-// #include "Gate.h"
+#include "Gate.h"
 #include "Item.h"
 
 class Game {
@@ -13,6 +13,7 @@ public:
     Snake curSnake;
     Map curMap;
     int curLv;
+    std::vector <Gate> gate;
     std::vector<Item> item;
 
     Game() {};
@@ -24,6 +25,7 @@ public:
     bool isGameOver();
     bool isCollision();
     bool isGetItem();
+    bool isOnGate();
     void isGameClear();
 
 };

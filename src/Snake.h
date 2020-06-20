@@ -9,7 +9,7 @@ struct POSITION {
     POSITION(int y, int x);
     POSITION();
 
-    bool operator==(POSITION& p);
+    bool operator==(POSITION p);
 };
 
 class Snake {
@@ -42,6 +42,12 @@ public:
     /*snake의 생사여부*/
     bool fail;
 
+    /*게이트 이용중인지*/
+    bool onGate;
+
+    /* 게이트로 순간이동한 좌표*/
+    POSITION gatepos;
+
     /*Snake의 maxLength 갱신*/
     void setMaxLength();
 
@@ -60,11 +66,26 @@ public:
     /*snake가 죽음*/
     void setFailed();
 
+    /* 게이트 이용중인가요? */
+    bool isOnGate();
+
+    /* 게이트 이용한다고 알려주는거*/
+    void usingGate(POSITION p);
+
+    /* 게이트 탈출*/
+    void outGate();
+
     /*키를 받고 snake 방향전환함*/
     void setDirection();
 
     /* 임의로 snake 방향 전환 */
     void makeDirectionThis(char c);
+
+    /* Snake Direction 값*/
+    char getDirection();
+
+    /* Snake head pos 지정 */
+    void setHeadPos(POSITION p);
 
     /*snake를 움직임*/
     void moveSnake();

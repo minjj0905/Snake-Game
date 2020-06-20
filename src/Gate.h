@@ -28,6 +28,9 @@ public:
     /* 상하좌우값 저장 */
     void setUdlr(Map m);
 
+    /* 상하좌우값 반환 */
+    int getUdlr(int posnum, int idx);
+
     /*Gate의 pos 반환 */
     POSITION getGatePos(int n);
 
