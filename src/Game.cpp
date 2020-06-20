@@ -69,9 +69,9 @@ void Game::runLevel() {
                     eraseTimer.startTimer();
                 }
             }
-            if(isOnGate()) {
-                mvprintw(10, 50, "이용중");
-            }
+            // if(isOnGate()) {
+            //     mvprintw(10, 50, "이용중");
+            // }
             view.draw(curMap, curSnake, item);
             tickTimer.startTimer();
         }
@@ -92,7 +92,9 @@ void Game::runLevel() {
         }
 
         //게이트 생성
-        if(gatetime > rand() % 3 + 5) {
+        if(gatetime > 5) {
+            mvprintw(2, 40, "시간됨");
+            view.draw(curMap, curSnake, item);
             if(gate.size() < 1) {
                 Gate newgate = Gate(curMap);
                 newgate.pos1 = POSITION(0, 1);
