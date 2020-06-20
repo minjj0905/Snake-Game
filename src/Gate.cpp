@@ -41,7 +41,7 @@ void Gate::setUdlr(Map m) {
     
     //pos1
     for(int i=0; i<4; i++) {
-        if((pos1.y+dir[i][0] <= h) && (pos1.y+dir[i][0] >= 0) && (pos1.x+dir[i][1] <= w) && (pos1.x+dir[i][1] >= 0)) {
+        if((pos1.y+dir[i][0] < h) && (pos1.y+dir[i][0] >= 0) && (pos1.x+dir[i][1] < w) && (pos1.x+dir[i][1] >= 0)) {
             pos1_udlr[i] = m.getMapValue(pos1.y+dir[i][0], pos1.x+dir[i][1]);
         }
         else {
@@ -51,7 +51,7 @@ void Gate::setUdlr(Map m) {
 
     //pos2
     for(int i=0; i<4; i++) {
-        if((pos2.y+dir[i][0] <= h) && (pos2.y+dir[i][0] >= 0) && (pos2.x+dir[i][1] <= w) && (pos2.x+dir[i][1] >= 0)) {
+        if((pos2.y+dir[i][0] < h) && (pos2.y+dir[i][0] >= 0) && (pos2.x+dir[i][1] < w) && (pos2.x+dir[i][1] >= 0)) {
             pos2_udlr[i] = m.getMapValue(pos2.y+dir[i][0], pos2.x+dir[i][1]);
         }
         else {
