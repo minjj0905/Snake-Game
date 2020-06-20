@@ -94,6 +94,10 @@ void Snake::setDirection() {
     }
 }
 
+void Snake::makeDirectionThis(char c) {
+    direction = c;
+}
+
 void Snake::moveSnake() {
     if (direction == 'l') {
         snakePos.insert(snakePos.begin(), POSITION(snakePos[0].y, snakePos[0].x - 1));

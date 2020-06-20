@@ -63,6 +63,9 @@ public:
     /*키를 받고 snake 방향전환함*/
     void setDirection();
 
+    /* 임의로 snake 방향 전환 */
+    void makeDirectionThis(char c);
+
     /*snake를 움직임*/
     void moveSnake();
 
