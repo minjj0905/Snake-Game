@@ -79,13 +79,13 @@ void View::drawSnake(Snake snake) {
 
     //head
     wprintw(gameWindow, " ");
-    mvwprintw(gameWindow, snakepos[0].y, 2*snakepos[0].x, "■");
+    mvwprintw(gameWindow, snakepos[0].y, 2*snakepos[0].x, "●");
 
     //body
     for(int i=1; i<snake.getLength(); i++) {
         POSITION pos = snakepos[i];
         wprintw(gameWindow, " ");
-        mvwprintw(gameWindow, pos.y, 2*pos.x, "□");
+        mvwprintw(gameWindow, pos.y, 2*pos.x, "○");
     }
 }
 
@@ -94,13 +94,15 @@ void View::drawItem(std::vector<Item> item) {
         POSITION itempos = item[i].getItemPos();
         if(item[i].isGrowItem()) {
             wattron(gameWindow, COLOR_PAIR('g'));
-            mvwprintw(gameWindow, itempos.y, 2*itempos.x, "■");
+            mvwprintw(gameWindow, itempos.y, 2*itempos.x, "♣");
         }else{
             wattron(gameWindow, COLOR_PAIR('r'));
-            mvwprintw(gameWindow, itempos.y, 2*itempos.x, "■");
+            mvwprintw(gameWindow, itempos.y, 2*itempos.x, "❌");
         }
     }
 }
+
+
 
 void View::drawScoreWindow(Snake snake) {
     return;

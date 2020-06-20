@@ -42,7 +42,7 @@ void Game::runLevel() {
     double gatetime;
     int playtime;
 
-    while(1) {
+    while(!isGameOver()) {
         view.update();
 
         levelTimer.updateTime();
@@ -93,12 +93,12 @@ void Game::runLevel() {
 
         //게이트 생성
         if(gatetime > 5) {
-            mvprintw(2, 40, "시간됨");
-            view.draw(curMap, curSnake, item);
             if(gate.size() < 1) {
                 Gate newgate = Gate(curMap);
-                newgate.pos1 = POSITION(0, 1);
-                newgate.pos2 = POSITION(1, 10);
+                mvprintw(4, 4, std::to_string(newgate.pos2_udlr[0]).c_str());
+                mvprintw(4, 5, std::to_string(newgate.pos2_udlr[1]).c_str());
+                mvprintw(4, 6, std::to_string(newgate.pos2_udlr[2]).c_str());
+                mvprintw(4, 7, std::to_string(newgate.pos2_udlr[3]).c_str());
                 gate.push_back(newgate);
             }
             gateTimer.startTimer();
@@ -180,13 +180,12 @@ bool Game::isOnGate() {
                 break;
             }
         }
-
         int* squence = dirSquence[diridx];
 
         char newdir;
         for (int i=0; i<4; i++) {
            if(curGate.getUdlr(2, squence[i]) == 0) {
-               newdir = udlr[i];
+               newdir = udlr[squence[i]];
                break;
            }
         }
@@ -235,7 +234,7 @@ bool Game::isOnGate() {
         char newdir;
         for (int i=0; i<4; i++) {
            if(curGate.getUdlr(1, squence[i]) == 0) {
-               newdir = udlr[i];
+               newdir = udlr[squence[i]];
                break;
            }
         }
