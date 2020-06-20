@@ -18,8 +18,15 @@ public:
     POSITION pos1;
     POSITION pos2;
 
+    /* 상하좌우 value */
+    int pos1_udlr[4];
+    int pos2_udlr[4];
+
     /*Gate의 pos지정*/
     void setGatePos(Map m);
+
+    /* 상하좌우값 저장 */
+    void setUdlr(Map m);
 
     /*Gate의 pos 반환 */
     POSITION getGatePos(int n);
