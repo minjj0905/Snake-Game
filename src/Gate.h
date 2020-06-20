@@ -20,5 +20,11 @@ public:
 
     /*Gate의 pos지정*/
     void setGatePos(Map m);
+
+    /*Gate의 pos 반환 */
+    POSITION getGatePos(int n);
+
+    /*반대 Gate Pos*/
+    POSITION getOtherPos(POSITION p);
 };
 #endif

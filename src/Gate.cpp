@@ -31,3 +31,16 @@ void Gate::setGatePos(Map m) {
         }
     }
 }
+
+POSITION Gate::getGatePos(int n) {
+    if (n == 1) {
+        return pos1;
+    }else if (n ==2) {
+        return pos2;
+    }
+}
+
+POSITION Gate::getOtherPos(POSITION p) {
+    if (p == pos1) return pos2;
+    else if (p == pos2) return pos1;
+}
