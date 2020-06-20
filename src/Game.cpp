@@ -29,7 +29,7 @@ void Game::runLevel() {
 
     curMap = level.getCurrentMap();
     curSnake = Snake(curMap);
-    view.draw(curMap, curSnake, item);
+    view.draw(curMap, curSnake, item, gate);
 
     levelTimer.startTimer();
     itemTimer.startTimer();
@@ -42,8 +42,9 @@ void Game::runLevel() {
     double gatetime;
     int playtime;
 
-    while(!isGameOver()) {
-        view.update();
+    bool play = true;
+    while(play) {
+        // view.update();
 
         levelTimer.updateTime();
         itemTimer.updateTime();
@@ -70,9 +71,10 @@ void Game::runLevel() {
                 }
             }
             if(isOnGate()) {
-                mvprintw(10, 50, "이용중");
+                gateTimer.startTimer();
             }
-            view.draw(curMap, curSnake, item);
+            play = !isGameOver();
+            view.draw(curMap, curSnake, item, gate);
             tickTimer.startTimer();
         }
 
@@ -92,7 +94,7 @@ void Game::runLevel() {
         }
 
         //게이트 생성
-        if(gatetime > 5) {
+        if(gatetime > 10) {
             if(gate.size() < 1) {
                 Gate newgate = Gate(curMap);
                 mvprintw(4, 4, std::to_string(newgate.pos2_udlr[0]).c_str());
@@ -119,16 +121,14 @@ bool Game::isCollision() {
     POSITION headpos = curSnake.getPosition()[0];
     int posvalue = curMap.getMapValue(headpos.y, headpos.x);
     if((posvalue == 1) || (posvalue == 2)) {
-        if(gate.size() > 0) {
-            POSITION gatepos1 = gate[0].getGatePos(1);
-            POSITION gatepos2 = gate[0].getGatePos(2);
-            if((headpos == gatepos1) || (headpos == gatepos2)) {
+        if(!gate.empty()) {
+            if(headpos == gate[0].getGatePos(1) || headpos == gate[0].getGatePos(2)) {
                 return false;
             }
+        }
         return true;
     }
     return false;
-    }
 }
 
 bool Game::isGetItem() {
@@ -150,11 +150,7 @@ bool Game::isGetItem() {
 
 bool Game::isOnGate() {
     // 게이트 체크해서 방향 바꾸고 pos 위치 변경
-    mvprintw(2, 20, "시작");
-    view.draw(curMap, curSnake, item);
     if(gate.empty()) return false;
-    mvprintw(2, 30, "레알시작");
-    view.draw(curMap, curSnake, item);
     std::vector<POSITION> snakepos = curSnake.getPosition();
     Gate curGate = gate[0];
     //나갈 방향 순서 u=0 d=1 l=2 r=3
@@ -168,8 +164,6 @@ bool Game::isOnGate() {
 
     //머리좌표 바꾸기
     if(snakepos[0] == gate[0].getGatePos(1)) {
-        mvprintw(2, 60, "pos1");
-        view.draw(curMap, curSnake, item);
         snakepos[0] = gate[0].getGatePos(2);
         char dir = curSnake.getDirection();
         int diridx;
@@ -190,32 +184,12 @@ bool Game::isOnGate() {
            }
         }
         curSnake.makeDirectionThis(newdir);
-
-        // //노가다로 짜고 나중에 고쳐보자 ,,, 모르겠다..
-        // if(newdir == 'u') {
-        //     headpos.y--;
-        //     curSnake.setHeadPos(headpos);
-        // }
-        // else if(newdir == 'd') {
-        //     headpos.y++;
-        //     curSnake.setHeadPos(headpos);
-        // }
-        // else if(newdir == 'l') {
-        //     headpos.x--;
-        //     curSnake.setHeadPos(headpos);
-        // }
-        // else if(newdir == 'r') {
-        //     headpos.x++;
-        //     curSnake.setHeadPos(headpos);
-        // }
         curSnake.setHeadPos(snakepos[0]);
         curSnake.usingGate(snakepos[0]);
     }
 
     //일단 양쪽 각각 걍 둘다 적어..
     else if(snakepos[0] == gate[0].getGatePos(2)) {
-        mvprintw(2, 60, "pos2");
-        view.draw(curMap, curSnake, item);
         snakepos[0] = gate[0].getGatePos(1);
         char dir = curSnake.getDirection();
         int diridx;
@@ -226,9 +200,6 @@ bool Game::isOnGate() {
                 break;
             }
         }
-        mvprintw(2, 40, "dir인덱스");
-        view.draw(curMap, curSnake, item);
-
         int* squence = dirSquence[diridx];
 
         char newdir;
@@ -239,46 +210,19 @@ bool Game::isOnGate() {
            }
         }
         curSnake.makeDirectionThis(newdir);
-
-        mvprintw(2, 47, "방향");
-        view.draw(curMap, curSnake, item);
-        //노가다로 짜고 나중에 고쳐보자 ,,, 모르겠다..
-        // if(newdir == 'u') {
-        //     headpos.y--;
-        //     curSnake.setHeadPos(headpos);
-        // }
-        // else if(newdir == 'd') {
-        //     headpos.y++;
-        //     curSnake.setHeadPos(headpos);
-        // }
-        // else if(newdir == 'l') {
-        //     headpos.x--;
-        //     curSnake.setHeadPos(headpos);
-        // }
-        // else if(newdir == 'r') {
-        //     headpos.x++;
-        //     curSnake.setHeadPos(headpos);
-        // }
         curSnake.setHeadPos(snakepos[0]);
         curSnake.usingGate(snakepos[0]);
     }
 
-    view.draw(curMap, curSnake, item);
-
     for(int i=0; i<curSnake.getLength(); i++) {
         if (snakepos[i] == curSnake.gatepos) {
             if (i==curSnake.getLength()-1) {
-                mvprintw(2, 70, "삭제래요");
-                view.draw(curMap, curSnake, item);
                 curSnake.outGate();
                 gate.erase(gate.begin());
             }
             return true;
         }
     }
-
-    view.draw(curMap, curSnake, item);
-
     return false;
 
 }

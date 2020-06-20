@@ -16,6 +16,7 @@ View::View() {
     init_pair(2, COLOR_CYAN, COLOR_BLACK);
     init_pair('g', COLOR_GREEN, COLOR_BLACK);
     init_pair('r', COLOR_RED, COLOR_BLACK);
+    init_pair('p', COLOR_YELLOW, COLOR_BLACK);
     init_pair(4, COLOR_BLACK, COLOR_BLACK);
     
     bkgd(COLOR_PAIR(1));
@@ -33,11 +34,12 @@ void View::drawGameOver(){
     getch();
 }
 
-void View::draw(Map map, Snake snake, std::vector<Item> item) {
+void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate) {
     drawMainWindow();
-    drawGameWindow(map, snake, item);
+    drawGameWindow(map);
     drawSnake(snake);
     drawItem(item);
+    drawGate(gate);
     drawScoreWindow(snake);
     drawBorder();
     update();
@@ -50,7 +52,7 @@ void View::drawMainWindow() {
     return;
 }
 
-void View::drawGameWindow(Map map, Snake snake, std::vector<Item> item) {
+void View::drawGameWindow(Map map) {
     gameWindow = newwin(25, 50, 5, 2);
     wbkgd(gameWindow, COLOR_PAIR(1));
     wattron(gameWindow, COLOR_PAIR(1));
@@ -102,7 +104,15 @@ void View::drawItem(std::vector<Item> item) {
     }
 }
 
-
+void View::drawGate(std::vector<Gate> gate) {
+    wattron(gameWindow, COLOR_PAIR('p'));
+    if(!gate.empty()) {
+        POSITION gatepos1 = gate[0].getGatePos(1);
+        POSITION gatepos2 = gate[0].getGatePos(2);
+        mvwprintw(gameWindow, gatepos1.y, 2*gatepos1.x, "▦");
+        mvwprintw(gameWindow, gatepos2.y, 2*gatepos2.x, "▦");
+    }
+}
 
 void View::drawScoreWindow(Snake snake) {
     return;

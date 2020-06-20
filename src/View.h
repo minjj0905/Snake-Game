@@ -6,6 +6,7 @@
 #include "Level.h"
 #include "Snake.h"
 #include "Item.h"
+#include "Gate.h"
 
 class View {
 public:
@@ -25,19 +26,22 @@ public:
     void drawGameClear();
 
     /* 메인 플레이 화면을 그림 */
-    void draw(Map map, Snake snake, std::vector<Item> item);
+    void draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate);
 
     /* MainWindow 그리기 */
     void drawMainWindow();
 
     /* gameWindow 그리기 */
-    void drawGameWindow(Map map, Snake, std::vector<Item> item);
+    void drawGameWindow(Map map);
 
     /* 화면에 Snake 그리기 */
     void drawSnake(Snake snake);
 
     /* 화면에 Item 그리기 */
     void drawItem(std::vector<Item> item);
+
+    /* 화면에 Gate 그리기 */
+    void drawGate(std::vector<Gate> gate);
 
     /* 화면에 ScoreBoard 그리기 */
     void drawScoreWindow(Snake snake);
