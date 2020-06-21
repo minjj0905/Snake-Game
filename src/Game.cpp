@@ -213,7 +213,6 @@ bool Game::isOnGate() {
         curSnake.usingGate(snakepos[0]);
     }
 
-    //일단 양쪽 각각 걍 둘다 적어..
     else if(snakepos[0] == gate[0].getGatePos(2)) {
         snakepos[0] = gate[0].getGatePos(1);
         char dir = curSnake.getDirection();
@@ -262,7 +261,6 @@ bool Game::isLevelClear() {
     return true;
 }
 
-// Test
 int main() {
     Game game = Game();
     game.newGame();

@@ -221,16 +221,3 @@ void View::update()  {
     wrefresh(gameWindow);
     wrefresh(scoreWindow);
 }
-/* 테스트용 코드, mainlogic 간단한 버전이라고 보면 될 듯*/
-// int main() {
-//     Level lv;
-//     lv.createMap();
-//     Snake snake;
-//     View test;
-//     Map map = lv.getCurrentMap();
-//     test.draw(map, snake);
-//     getch();
-//     delwin(test.gameWindow);
-//     endwin();
-// }
-/* 테스트 끝 */
