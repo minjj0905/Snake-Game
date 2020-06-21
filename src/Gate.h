@@ -36,5 +36,8 @@ public:
 
     /*반대 Gate Pos*/
     POSITION getOtherPos(POSITION p);
+
+    /*Gate의 입구 공유 여부*/
+    bool preventShare(int x1, int y1, int x2, int y2);
 };
 #endif

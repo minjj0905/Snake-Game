@@ -12,6 +12,7 @@ void Gate::setGatePos(Map m) {
     int y1 = rand() % m.mapHeight;
     int x2 = rand() % m.mapWidth;
     int y2 = rand() % m.mapHeight;
+    
     if (m.map[y1][x1] == 1) {
         pos1 = POSITION(y1, x1);
     } else {
@@ -21,10 +22,10 @@ void Gate::setGatePos(Map m) {
             pos1 = POSITION(y1, x1);
         }
     }
-    if (m.map[y2][x2] == 1 && (x1 != x2 || y1 != y2)) {
+    if ((m.map[y2][x2] == 1) && (x1 != x2 || y1 != y2) && (preventShare(x1, y1, x2, y2))) {
         pos2 = POSITION(y2, x2);
     } else {
-        while (m.map[y2][x2] != 1 || (x1 == x2 && y1 == y2)) {
+        while ((m.map[y2][x2] != 1) || (x1 == x2 && y1 == y2) || (!preventShare(x1, y1, x2, y2))) {
             x2 = rand() % m.mapWidth;
             y2 = rand() % m.mapHeight;
             pos2 = POSITION(y2, x2);
@@ -76,4 +77,14 @@ POSITION Gate::getGatePos(int n) {
 POSITION Gate::getOtherPos(POSITION p) {
     if (p == pos1) return pos2;
     else if (p == pos2) return pos1;
+}
+
+bool Gate::preventShare(int x1, int y1, int x2, int y2) {
+    int dir[8][2] = { {1,  0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1} };
+    for (int i = 0; i < 8; i++) {
+        if ((x2 == x1 + dir[i][1]) && (y2 == y1 + dir[i][0])) {
+            return false;
+        }
+    }
+    return true;
 }
