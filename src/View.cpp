@@ -43,13 +43,13 @@ void View::drawGameClear(){
     getch();
 }
 
-void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate, Mission mission) {
+void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate, Mission mission, int time) {
     drawMainWindow();
     drawGameWindow(map);
     drawSnake(snake);
     drawItem(item);
     drawGate(gate);
-    drawScoreWindow(snake, mission);
+    drawScoreWindow(snake, mission, time);
     drawBorder();
     update();
 }
@@ -130,7 +130,7 @@ void View::drawGate(std::vector<Gate> gate) {
     drawBorder();
 }
 
-void View::drawScoreWindow(Snake snake, Mission mission) {
+void View::drawScoreWindow(Snake snake, Mission mission, int time) {
     scoreWindow = newwin(21, 30, 7, 48);
     wbkgd(scoreWindow, COLOR_PAIR('s'));
     wattron(scoreWindow, COLOR_PAIR('s'));
@@ -142,8 +142,8 @@ void View::drawScoreWindow(Snake snake, Mission mission) {
     //현재 값
     mvwprintw(scoreWindow, 2, 9, "Score Board");
 
-    mvwprintw(scoreWindow, 4, 7, "Max Length  : ");
-    mvwprintw(scoreWindow, 4, 21, std::to_string(snake.getMaxLength()).c_str());
+    mvwprintw(scoreWindow, 4, 7, "T  I  M  E  : ");
+    mvwprintw(scoreWindow, 4, 21, std::to_string(time).c_str());
     mvwprintw(scoreWindow, 5, 7, "Grow Item   : ");
     mvwprintw(scoreWindow, 5, 21, std::to_string(snake.getGrowCount()).c_str());
     mvwprintw(scoreWindow, 6, 7, "Poison Item : ");
@@ -160,7 +160,7 @@ void View::drawScoreWindow(Snake snake, Mission mission) {
     //목표값
     mvwprintw(scoreWindow, 12, 11, "Mission");
 
-    mvwprintw(scoreWindow, 14, 7, "Max Length  : ");
+    mvwprintw(scoreWindow, 14, 7, "T  I  M  E  : ");
     mvwprintw(scoreWindow, 14, 21, std::to_string(mission.getGoalScore()).c_str());
     mvwprintw(scoreWindow, 15, 7, "Grow Item   : ");
     mvwprintw(scoreWindow, 15, 21, std::to_string(mission.getGoalGrow()).c_str());

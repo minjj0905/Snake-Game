@@ -14,6 +14,7 @@ public:
     Map curMap;
     int curLv;
     Mission curmission;
+    int playtime;
     std::vector <Gate> gate;
     std::vector<Item> item;
 

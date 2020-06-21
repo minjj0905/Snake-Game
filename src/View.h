@@ -26,7 +26,7 @@ public:
     void drawGameClear();
 
     /* 메인 플레이 화면을 그림 */
-    void draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate, Mission mission);
+    void draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate, Mission mission, int time);
 
     /* MainWindow 그리기 */
     void drawMainWindow();
@@ -44,7 +44,7 @@ public:
     void drawGate(std::vector<Gate> gate);
 
     /* 화면에 ScoreBoard 그리기 */
-    void drawScoreWindow(Snake snake, Mission mission);
+    void drawScoreWindow(Snake snake, Mission mission, int time);
 
     /* Window Border */
     void drawBorder();

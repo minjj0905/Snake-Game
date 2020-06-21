@@ -44,7 +44,6 @@ void Game::runLevel() {
     curmission = level.getMission();
     gate.clear();
     item.clear();
-    view.draw(curMap, curSnake, item, gate, curmission);
 
     levelTimer.startTimer();
     itemTimer.startTimer();
@@ -55,9 +54,10 @@ void Game::runLevel() {
     double itemtime;
     double erasetime;
     double gatetime;
-    int playtime;
+    playtime = 0;
 
     bool play = true;
+    view.draw(curMap, curSnake, item, gate, curmission, playtime);
 
     while(!isGameOver() && !isLevelClear()) {
 
@@ -90,7 +90,7 @@ void Game::runLevel() {
             }
             level.setClear(isLevelClear());
             mvprintw(0, 40, "확인");
-            view.draw(curMap, curSnake, item, gate, curmission);
+            view.draw(curMap, curSnake, item, gate, curmission, playtime);
             tickTimer.startTimer();
         }
 
@@ -253,7 +253,7 @@ bool Game::isOnGate() {
 
 bool Game::isLevelClear() {
     Mission curmission = level.getMission();
-    if(curSnake.getMaxLength() < curmission.getGoalScore()) return false;
+    if(playtime < curmission.getGoalScore()) return false;
     if(curSnake.getGrowCount() < curmission.getGoalGrow()) return false;
     if(curSnake.getPoisonCount() < curmission.getGoalPoison()) return false;
     if(curSnake.getGateCount() < curmission.getGoalGate()) return false;
