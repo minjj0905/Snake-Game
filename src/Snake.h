@@ -117,7 +117,7 @@ public:
     /*snake의 curLength를 설정*/
     void setCurLength();
 
-    /* GrowCount 올리기 */
-    void upGrowCount();
+    /* gateCount 올리기 */
+    void upGateCount();
 };
 #endif

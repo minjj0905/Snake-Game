@@ -41,9 +41,10 @@ void Game::runLevel() {
     Timer eraseTimer;
     curMap = level.getCurrentMap();
     curSnake = Snake(curMap);
+    curmission = level.getMission();
     gate.clear();
     item.clear();
-    view.draw(curMap, curSnake, item, gate);
+    view.draw(curMap, curSnake, item, gate, curmission);
 
     levelTimer.startTimer();
     itemTimer.startTimer();
@@ -89,7 +90,7 @@ void Game::runLevel() {
             }
             level.setClear(isLevelClear());
             mvprintw(0, 40, "확인");
-            view.draw(curMap, curSnake, item, gate);
+            view.draw(curMap, curSnake, item, gate, curmission);
             tickTimer.startTimer();
         }
 
@@ -204,6 +205,7 @@ bool Game::isOnGate() {
                break;
            }
         }
+        curSnake.upGateCount();
         curSnake.makeDirectionThis(newdir);
         curSnake.setHeadPos(snakepos[0]);
         curSnake.usingGate(snakepos[0]);
@@ -230,6 +232,7 @@ bool Game::isOnGate() {
                break;
            }
         }
+        curSnake.upGateCount();
         curSnake.makeDirectionThis(newdir);
         curSnake.setHeadPos(snakepos[0]);
         curSnake.usingGate(snakepos[0]);

@@ -19,6 +19,7 @@ View::View() {
     init_pair('p', COLOR_YELLOW, COLOR_BLACK);
     init_pair(4, COLOR_BLACK, COLOR_BLACK);
     init_pair('b', 8, COLOR_BLACK);
+    init_pair('s', 11, COLOR_BLACK);
     
     bkgd(COLOR_PAIR(1));
 }
@@ -42,13 +43,13 @@ void View::drawGameClear(){
     getch();
 }
 
-void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate) {
+void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate, Mission mission) {
     drawMainWindow();
     drawGameWindow(map);
     drawSnake(snake);
     drawItem(item);
     drawGate(gate);
-    drawScoreWindow(snake);
+    drawScoreWindow(snake, mission);
     drawBorder();
     update();
 }
@@ -61,7 +62,7 @@ void View::drawMainWindow() {
 }
 
 void View::drawGameWindow(Map map) {
-    gameWindow = newwin(25, 50, 5, 2);
+    gameWindow = newwin(22, 44, 7, 2);
     wbkgd(gameWindow, COLOR_PAIR(1));
     wattron(gameWindow, COLOR_PAIR(1));
 
@@ -126,10 +127,54 @@ void View::drawGate(std::vector<Gate> gate) {
         mvwprintw(gameWindow, gatepos1.y, 2*gatepos1.x, "▦");
         mvwprintw(gameWindow, gatepos2.y, 2*gatepos2.x, "▦");
     }
+    drawBorder();
 }
 
-void View::drawScoreWindow(Snake snake) {
-    return;
+void View::drawScoreWindow(Snake snake, Mission mission) {
+    scoreWindow = newwin(21, 30, 7, 48);
+    wbkgd(scoreWindow, COLOR_PAIR('s'));
+    wattron(scoreWindow, COLOR_PAIR('s'));
+    for(int i=0; i<15; i++) {
+        wprintw(scoreWindow, " ");
+        mvwprintw(scoreWindow, 0, 2*i, "🟊");
+    }
+
+    //현재 값
+    mvwprintw(scoreWindow, 2, 9, "Score Board");
+
+    mvwprintw(scoreWindow, 4, 7, "Max Length  : ");
+    mvwprintw(scoreWindow, 4, 21, std::to_string(snake.getMaxLength()).c_str());
+    mvwprintw(scoreWindow, 5, 7, "Grow Item   : ");
+    mvwprintw(scoreWindow, 5, 21, std::to_string(snake.getGrowCount()).c_str());
+    mvwprintw(scoreWindow, 6, 7, "Poison Item : ");
+    mvwprintw(scoreWindow, 6, 21, std::to_string(snake.getPoisonCount()).c_str());
+    mvwprintw(scoreWindow, 7, 7, "Gate Used   : ");
+    mvwprintw(scoreWindow, 7, 21, std::to_string(snake.getGateCount()).c_str());
+
+    //구분선
+    for(int i=0; i<15; i++) {
+        wprintw(scoreWindow, " ");
+        mvwprintw(scoreWindow, 10, 2*i, "🟊");
+    }
+
+    //목표값
+    mvwprintw(scoreWindow, 12, 11, "Mission");
+
+    mvwprintw(scoreWindow, 14, 7, "Max Length  : ");
+    mvwprintw(scoreWindow, 14, 21, std::to_string(mission.getGoalScore()).c_str());
+    mvwprintw(scoreWindow, 15, 7, "Grow Item   : ");
+    mvwprintw(scoreWindow, 15, 21, std::to_string(mission.getGoalGrow()).c_str());
+    mvwprintw(scoreWindow, 16, 7, "Poison Item : ");
+    mvwprintw(scoreWindow, 16, 21, std::to_string(mission.getGoalPoison()).c_str());
+    mvwprintw(scoreWindow, 17, 7, "Gate Used   : ");
+    mvwprintw(scoreWindow, 17, 21, std::to_string(mission.getGoalGate()).c_str());
+
+    //구분선
+    for(int i=0; i<15; i++) {
+        wprintw(scoreWindow, " ");
+        mvwprintw(scoreWindow, 20, 2*i, "🟊");
+    }
+
 }
 
 void View::drawBorder() {
@@ -139,6 +184,7 @@ void View::drawBorder() {
 void View::update()  {
     refresh();
     wrefresh(gameWindow);
+    wrefresh(scoreWindow);
 }
 /* 테스트용 코드, mainlogic 간단한 버전이라고 보면 될 듯*/
 // int main() {

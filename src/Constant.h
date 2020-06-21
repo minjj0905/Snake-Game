@@ -1,4 +1,4 @@
 /* 상수 정의 */
 
-#define WINDOW_HEIGHT       35
-#define WINDOW_WIDTH        100
+#define WINDOW_HEIGHT       30
+#define WINDOW_WIDTH        80

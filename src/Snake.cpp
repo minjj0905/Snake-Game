@@ -21,6 +21,7 @@ Snake::Snake(Map& m) {
     curLength = 3;
     growCount = 0;
     poisonCount = 0;
+    gateCount = 0;
     fail = false;
     tailPos.push_back(POSITION());
     for (int i = 0; i < m.mapHeight; i++) {
@@ -200,6 +201,6 @@ void Snake::setCurLength() {
     curLength = getLength();
 }
 
-void Snake::upGrowCount() {
-    growCount++;
+void Snake::upGateCount() {
+    gateCount++;
 }

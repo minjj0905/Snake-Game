@@ -13,6 +13,7 @@ public:
     Snake curSnake;
     Map curMap;
     int curLv;
+    Mission curmission;
     std::vector <Gate> gate;
     std::vector<Item> item;
 
