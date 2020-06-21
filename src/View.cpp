@@ -17,7 +17,7 @@ View::View() {
     init_pair(2, 14, COLOR_BLACK);
     init_pair('g', 10, COLOR_BLACK);
     init_pair('r', 9, COLOR_BLACK);
-    init_pair('m', 5, COLOR_BLACK);
+    init_pair('m', 213, COLOR_BLACK);
     init_pair('b', 8, COLOR_BLACK);
     init_pair('s', 11, COLOR_BLACK);
     
@@ -26,33 +26,50 @@ View::View() {
 }
 
 void View::drawStartScreen(){
-    attron(COLOR_PAIR('b'));
-    mvprintw(10, 10, "게임을 시작하려면 아무키나 누르세요");
+    attron(COLOR_PAIR('g'));
+    mvprintw(10, 5, "██    ██  ██  ██  ████████   ████████    ██ ██    ████    ██  ████████");
+    mvprintw(11, 5, "████████  ██████  ██    ██         ██  ████ ██  ██    ██  ██  ██    ██");
+    mvprintw(12, 5, "██    ██  ██  ██  ██    ██         ██    ██ ██  ██    ██  ██  ██    ██");
+    mvprintw(13, 5, "████████  ██  ██  ████████         ██    ██ ██    ████    ██  ████████");
+    attron(COLOR_PAIR('w'));
+    mvprintw(20, 21, "게임을 시작하려면 아무키나 누르세요");
+    drawBorder();
     refresh();
 }
 
 void View::drawGameOver(){
     clear();
     nodelay(stdscr, FALSE);
-    attron(COLOR_PAIR('b'));
-    mvprintw(10, 10, "Gameover...");
+    attron(COLOR_PAIR('w'));
+    mvprintw(12, 35, "게임 오버!");
+    mvprintw(17, 26, "아무키나 누르면 종료됩니다");
+    drawBorder();
     getch();
+    clear();
 }
 
 void View::drawNextStage() {
     clear();
     nodelay(stdscr, FALSE);
-    attron(COLOR_PAIR('b'));
-    mvprintw(10, 10, "Stage Clear!");
-    mvprintw(12, 8, "Press any key...");
+    attron(COLOR_PAIR('w'));
+    mvprintw(12, 31, "스테이지 클리어!");
+    mvprintw(17, 26, "아무키나 누르면 넘어갑니다");
+    drawBorder();
     getch();
     refresh();
 }
 
 void View::drawGameClear(){
     clear();
-    nodelay(stdscr, FALSE);
-    mvprintw(10, 10, "Clear!");
+    attron(COLOR_PAIR('g'));
+    mvprintw(10, 5, "██    ██  ██  ██  ████████   ████████    ██ ██    ████    ██  ████████");
+    mvprintw(11, 5, "████████  ██████  ██    ██         ██  ████ ██  ██    ██  ██  ██    ██");
+    mvprintw(12, 5, "██    ██  ██  ██  ██    ██         ██    ██ ██  ██    ██  ██  ██    ██");
+    mvprintw(13, 5, "████████  ██  ██  ████████         ██    ██ ██    ████    ██  ████████");
+    attron(COLOR_PAIR('w'));
+    mvprintw(20, 26, "게임클리어를 축하합니다!");
+    mvprintw(20, 26, "제작자 : 김민정 / 김은수");
+    drawBorder();
     getch();
     refresh();
 }
@@ -71,10 +88,10 @@ void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> 
 void View::drawMainWindow() {
     //타이틀
     attron(COLOR_PAIR('g'));
-    mvprintw(2, 5, "██    ██  ██  ██  ████████  ████████    ██ ██    ████    ██  ████████");
-    mvprintw(3, 5, "████████  ██████  ██    ██        ██  ████ ██  ██    ██  ██  ██    ██");
-    mvprintw(4, 5, "██    ██  ██  ██  ██    ██        ██    ██ ██  ██    ██  ██  ██    ██");
-    mvprintw(5, 5, "████████  ██  ██  ████████        ██    ██ ██    ████    ██  ████████");
+    mvprintw(2, 5, "██    ██  ██  ██  ████████   ████████    ██ ██    ████    ██  ████████");
+    mvprintw(3, 5, "████████  ██████  ██    ██         ██  ████ ██  ██    ██  ██  ██    ██");
+    mvprintw(4, 5, "██    ██  ██  ██  ██    ██         ██    ██ ██  ██    ██  ██  ██    ██");
+    mvprintw(5, 5, "████████  ██  ██  ████████         ██    ██ ██    ████    ██  ████████");
 }
 
 void View::drawGameWindow(Map map) {
@@ -136,12 +153,12 @@ void View::drawItem(std::vector<Item> item) {
 }
 
 void View::drawGate(std::vector<Gate> gate) {
-    wattron(gameWindow, COLOR_PAIR('s'));
+    wattron(gameWindow, COLOR_PAIR('m'));
     if(!gate.empty()) {
         POSITION gatepos1 = gate[0].getGatePos(1);
         POSITION gatepos2 = gate[0].getGatePos(2);
-        mvwprintw(gameWindow, gatepos1.y, 2*gatepos1.x, "▦");
-        mvwprintw(gameWindow, gatepos2.y, 2*gatepos2.x, "▦");
+        mvwprintw(gameWindow, gatepos1.y, 2*gatepos1.x, "🄶");
+        mvwprintw(gameWindow, gatepos2.y, 2*gatepos2.x, "🄶");
     }
     drawBorder();
 }
@@ -194,6 +211,7 @@ void View::drawScoreWindow(Snake snake, Mission mission, int time) {
 }
 
 void View::drawBorder() {
+    attron(COLOR_PAIR('g'));
     border(0, 0, 0, 0, 0, 0, 0, 0);
 }
 

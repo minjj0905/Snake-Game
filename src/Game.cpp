@@ -8,16 +8,18 @@ void Game::newGame() {
     level = Level();
     level.createMap();
     keypad(stdscr, TRUE);
-    nodelay(stdscr, TRUE);
-    cbreak();
     view.drawStartScreen();
     getch();
 }
 
 void Game::runGame() {
+    clear();
     while(!isGameClear()) {
         runLevel();
         if(level.getClear()) {
+            if(level.getCurrentLevel() == 3) {
+                break;
+            }
             level.upCurrentLevel();
             view.drawNextStage();
         }
@@ -61,7 +63,7 @@ void Game::runLevel() {
     bool play = true;
     view.draw(curMap, curSnake, item, gate, curmission, playtime);
 
-    while(!isGameOver() && !isLevelClear()) {
+    while(play) {
 
         levelTimer.updateTime();
         itemTimer.updateTime();
@@ -91,6 +93,7 @@ void Game::runLevel() {
                 gateTimer.startTimer();
             }
             level.setClear(isLevelClear());
+            play = !isGameOver() && !isLevelClear();
             view.draw(curMap, curSnake, item, gate, curmission, playtime);
             tickTimer.startTimer();
         }
