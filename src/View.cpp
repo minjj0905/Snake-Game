@@ -13,18 +13,20 @@ View::View() {
     start_color();
 
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
-    init_pair(2, COLOR_CYAN, COLOR_BLACK);
-    init_pair('g', COLOR_GREEN, COLOR_BLACK);
-    init_pair('r', COLOR_RED, COLOR_BLACK);
-    init_pair('p', COLOR_YELLOW, COLOR_BLACK);
-    init_pair(4, COLOR_BLACK, COLOR_BLACK);
+    init_pair('w', 15, COLOR_BLACK);
+    init_pair(2, 14, COLOR_BLACK);
+    init_pair('g', 10, COLOR_BLACK);
+    init_pair('r', 9, COLOR_BLACK);
+    init_pair('m', 5, COLOR_BLACK);
     init_pair('b', 8, COLOR_BLACK);
     init_pair('s', 11, COLOR_BLACK);
     
-    bkgd(COLOR_PAIR(1));
+    bkgd(COLOR_PAIR('w'));
+    attron(COLOR_PAIR('w'));
 }
 
 void View::drawStartScreen(){
+    attron(COLOR_PAIR('b'));
     mvprintw(10, 10, "게임을 시작하려면 아무키나 누르세요");
     refresh();
 }
@@ -32,8 +34,19 @@ void View::drawStartScreen(){
 void View::drawGameOver(){
     clear();
     nodelay(stdscr, FALSE);
+    attron(COLOR_PAIR('b'));
     mvprintw(10, 10, "Gameover...");
     getch();
+}
+
+void View::drawNextStage() {
+    clear();
+    nodelay(stdscr, FALSE);
+    attron(COLOR_PAIR('b'));
+    mvprintw(10, 10, "Stage Clear!");
+    mvprintw(12, 8, "Press any key...");
+    getch();
+    refresh();
 }
 
 void View::drawGameClear(){
@@ -41,6 +54,7 @@ void View::drawGameClear(){
     nodelay(stdscr, FALSE);
     mvprintw(10, 10, "Clear!");
     getch();
+    refresh();
 }
 
 void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> gate, Mission mission, int time) {
@@ -55,26 +69,28 @@ void View::draw(Map map, Snake snake, std::vector<Item> item, std::vector<Gate> 
 }
 
 void View::drawMainWindow() {
-    mvprintw(1, 3, "Preversion");
-    mvprintw(2, 3, "Logo Space");
-    mvprintw(3, 3, "margin");
-    return;
+    //타이틀
+    attron(COLOR_PAIR('g'));
+    mvprintw(2, 5, "██    ██  ██  ██  ████████  ████████    ██ ██    ████    ██  ████████");
+    mvprintw(3, 5, "████████  ██████  ██    ██        ██  ████ ██  ██    ██  ██  ██    ██");
+    mvprintw(4, 5, "██    ██  ██  ██  ██    ██        ██    ██ ██  ██    ██  ██  ██    ██");
+    mvprintw(5, 5, "████████  ██  ██  ████████        ██    ██ ██    ████    ██  ████████");
 }
 
 void View::drawGameWindow(Map map) {
     gameWindow = newwin(22, 44, 7, 2);
-    wbkgd(gameWindow, COLOR_PAIR(1));
-    wattron(gameWindow, COLOR_PAIR(1));
+    wbkgd(gameWindow, COLOR_PAIR('w'));
+    wattron(gameWindow, COLOR_PAIR('w'));
 
      for(int i=0; i<map.mapHeight; i++) {
         for(int j=0; j<map.mapWidth; j++) {
             int pos = map.getMapValue(i, j);
             if(pos == 0) {
-                wattron(gameWindow, COLOR_PAIR(1));
+                wattron(gameWindow, COLOR_PAIR('w'));
                 wprintw(gameWindow, "  ");
             }
             else if(pos == 1 || pos == 2) {
-                wattron(gameWindow, COLOR_PAIR(1));
+                wattron(gameWindow, COLOR_PAIR('w'));
                 wprintw(gameWindow, " ");
                 mvwprintw(gameWindow, i, 2*j, "■");
             }
@@ -120,7 +136,7 @@ void View::drawItem(std::vector<Item> item) {
 }
 
 void View::drawGate(std::vector<Gate> gate) {
-    wattron(gameWindow, COLOR_PAIR('p'));
+    wattron(gameWindow, COLOR_PAIR('s'));
     if(!gate.empty()) {
         POSITION gatepos1 = gate[0].getGatePos(1);
         POSITION gatepos2 = gate[0].getGatePos(2);

@@ -22,6 +22,9 @@ public:
     /* 게임 오버 화면 */
     void drawGameOver();
 
+    /* 스테이지 넘어가는 화면 */
+    void drawNextStage();
+
     /* 게임 클리어 화면 */
     void drawGameClear();
 

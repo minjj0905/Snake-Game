@@ -19,6 +19,7 @@ void Game::runGame() {
         runLevel();
         if(level.getClear()) {
             level.upCurrentLevel();
+            view.drawNextStage();
         }
         else{
             view.drawGameOver();
@@ -33,6 +34,7 @@ void Game::runGame() {
 
 void Game::runLevel() {
     srand((unsigned int)time(0));
+    nodelay(stdscr, TRUE);
 
     Timer levelTimer;
     Timer itemTimer;
@@ -89,7 +91,6 @@ void Game::runLevel() {
                 gateTimer.startTimer();
             }
             level.setClear(isLevelClear());
-            mvprintw(0, 40, "확인");
             view.draw(curMap, curSnake, item, gate, curmission, playtime);
             tickTimer.startTimer();
         }
@@ -113,10 +114,6 @@ void Game::runLevel() {
         if(gatetime > 10) {
             if(gate.size() < 1) {
                 Gate newgate = Gate(curMap);
-                mvprintw(4, 4, std::to_string(newgate.pos2_udlr[0]).c_str());
-                mvprintw(4, 5, std::to_string(newgate.pos2_udlr[1]).c_str());
-                mvprintw(4, 6, std::to_string(newgate.pos2_udlr[2]).c_str());
-                mvprintw(4, 7, std::to_string(newgate.pos2_udlr[3]).c_str());
                 gate.push_back(newgate);
             }
             gateTimer.startTimer();
