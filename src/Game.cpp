@@ -52,6 +52,7 @@ void Game::runLevel() {
     levelTimer.startTimer();
     itemTimer.startTimer();
     gateTimer.startTimer();
+    eraseTimer.startTimer();
     tickTimer.startTimer();
 
     double tick;
