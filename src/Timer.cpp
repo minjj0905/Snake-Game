@@ -9,11 +9,6 @@ void Timer::startTimer(){
     startTime = clock();
 }
 
-void Timer::resetTimer(){
-    startTime = clock();
-    currentTime = clock();
-}
-
 void Timer::updateTime() {
     currentTime = clock();
     tick = (double)(currentTime - startTime)/CLOCKS_PER_SEC;

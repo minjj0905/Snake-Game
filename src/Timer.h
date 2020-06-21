@@ -14,9 +14,6 @@ public:
     /* Timer 시작 */
     void startTimer();
 
-    /* Timer 리셋 */
-    void resetTimer();
-
     /* 현재 시간을 업데이트 */
     void updateTime();
 

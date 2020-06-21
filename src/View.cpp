@@ -125,8 +125,6 @@ void View::drawSnake(Snake snake) {
     std::vector<POSITION> snakepos = snake.getPosition();
 
     wattron(gameWindow, COLOR_PAIR(2));
-    wchar_t head[] = L" ■";
-    wchar_t body[] = L" □";
 
     //head
     wprintw(gameWindow, " ");
@@ -196,12 +194,24 @@ void View::drawScoreWindow(Snake snake, Mission mission, int time) {
 
     mvwprintw(scoreWindow, 14, 7, "T  I  M  E  : ");
     mvwprintw(scoreWindow, 14, 21, std::to_string(mission.getGoalScore()).c_str());
+    if(mission.getGoalScore() <= time) {
+         mvwprintw(scoreWindow, 14, 26, "✔");
+    }
     mvwprintw(scoreWindow, 15, 7, "Grow Item   : ");
     mvwprintw(scoreWindow, 15, 21, std::to_string(mission.getGoalGrow()).c_str());
+    if(mission.getGoalGrow() <= snake.getGrowCount()) {
+         mvwprintw(scoreWindow, 15, 26, "✔");
+    }
     mvwprintw(scoreWindow, 16, 7, "Poison Item : ");
     mvwprintw(scoreWindow, 16, 21, std::to_string(mission.getGoalPoison()).c_str());
+    if(mission.getGoalPoison() <= snake.getPoisonCount()) {
+         mvwprintw(scoreWindow, 16, 26, "✔");
+    }
     mvwprintw(scoreWindow, 17, 7, "Gate Used   : ");
     mvwprintw(scoreWindow, 17, 21, std::to_string(mission.getGoalGate()).c_str());
+    if(mission.getGoalGate() <= snake.getGateCount()) {
+         mvwprintw(scoreWindow, 17, 26, "✔");
+    }
 
     //구분선
     for(int i=0; i<15; i++) {
