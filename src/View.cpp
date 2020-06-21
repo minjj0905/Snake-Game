@@ -61,13 +61,14 @@ void View::drawNextStage() {
 
 void View::drawGameClear(){
     clear();
+    nodelay(stdscr, FALSE);
     attron(COLOR_PAIR('g'));
     mvprintw(10, 5, "██    ██  ██  ██  ████████   ████████    ██ ██    ████    ██  ████████");
     mvprintw(11, 5, "████████  ██████  ██    ██         ██  ████ ██  ██    ██  ██  ██    ██");
     mvprintw(12, 5, "██    ██  ██  ██  ██    ██         ██    ██ ██  ██    ██  ██  ██    ██");
     mvprintw(13, 5, "████████  ██  ██  ████████         ██    ██ ██    ████    ██  ████████");
     attron(COLOR_PAIR('w'));
-    mvprintw(20, 26, "게임클리어를 축하합니다!");
+    mvprintw(19, 26, "게임클리어를 축하합니다!");
     mvprintw(20, 26, "제작자 : 김민정 / 김은수");
     drawBorder();
     getch();
