@@ -2,10 +2,12 @@
 
 2020년 1학기 C++프로그래밍 프로젝트로 진행된 ncurses를 이용한 SnakeGame Project입니다.
 
+[결과보고서](https://github.com/minjj0905/kmucs-cpp-snakegame/blob/master/SnakeGame-%ED%8F%B0%EC%BD%94%EB%94%A9-%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf)
 
 
 ## 팀 소개
 
+**폰코딩**
 | 이름          | 학번     |
 | ------------- | -------- |
 | 김민정 (팀장) | 20191556 |
