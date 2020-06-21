@@ -261,7 +261,6 @@ bool Game::isLevelClear() {
     return true;
 }
 
-// Test
 int main() {
     Game game = Game();
     game.newGame();

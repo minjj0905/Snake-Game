@@ -31,8 +31,3 @@ int Mission::getGoalPoison() {
 int Mission::getGoalGate() {
     return goal[3];
 }
-
-// int main() {
-//     Mission m = Mission(0);
-//     cout << m.getGoalScore();
-// }
