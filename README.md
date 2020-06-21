@@ -81,3 +81,8 @@ sudo apt-get install libncurses5-dev libncursesw5-dev
 ○(몸통)에 ●(머리) 충돌시
 
 Snake의 길이가 3이하로 줄어들 시
+
+
+
+## 게임 플레이 화면
+![play_ex](https://github.com/minjj0905/kmucs-cpp-snakegame/blob/master/img/play_ex.png)
