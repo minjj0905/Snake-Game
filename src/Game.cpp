@@ -14,9 +14,6 @@ void Game::newGame() {
 
 void Game::runGame() {
     clear();
-    level.upCurrentLevel();
-    level.upCurrentLevel();
-    level.upCurrentLevel();
     while(!isGameClear()) {
         clear();
         runLevel();
