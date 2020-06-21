@@ -15,7 +15,20 @@ void Game::newGame() {
 }
 
 void Game::runGame() {
-    runLevel();
+    while(!isGameClear()) {
+        runLevel();
+        if(level.getClear()) {
+            level.upCurrentLevel();
+        }
+        else{
+            view.drawGameOver();
+            break;
+        }
+        
+    }
+    if(isGameClear()) {
+        view.drawGameClear();
+    }
 }
 
 void Game::runLevel() {
@@ -26,9 +39,10 @@ void Game::runLevel() {
     Timer gateTimer;
     Timer tickTimer;
     Timer eraseTimer;
-
     curMap = level.getCurrentMap();
     curSnake = Snake(curMap);
+    gate.clear();
+    item.clear();
     view.draw(curMap, curSnake, item, gate);
 
     levelTimer.startTimer();
@@ -43,8 +57,8 @@ void Game::runLevel() {
     int playtime;
 
     bool play = true;
-    while(play) {
-        // view.update();
+
+    while(!isGameOver() && !isLevelClear()) {
 
         levelTimer.updateTime();
         itemTimer.updateTime();
@@ -73,7 +87,8 @@ void Game::runLevel() {
             if(isOnGate()) {
                 gateTimer.startTimer();
             }
-            play = !isGameOver();
+            level.setClear(isLevelClear());
+            mvprintw(0, 40, "확인");
             view.draw(curMap, curSnake, item, gate);
             tickTimer.startTimer();
         }
@@ -106,7 +121,13 @@ void Game::runLevel() {
             gateTimer.startTimer();
         }
     }
-    view.drawGameOver();
+}
+
+bool Game::isGameClear() {
+    if(level.clear[3] == true) {
+        return true;
+    }
+    return false;
 }
 
 bool Game::isGameOver() {
@@ -225,6 +246,15 @@ bool Game::isOnGate() {
     }
     return false;
 
+}
+
+bool Game::isLevelClear() {
+    Mission curmission = level.getMission();
+    if(curSnake.getMaxLength() < curmission.getGoalScore()) return false;
+    if(curSnake.getGrowCount() < curmission.getGoalGrow()) return false;
+    if(curSnake.getPoisonCount() < curmission.getGoalPoison()) return false;
+    if(curSnake.getGateCount() < curmission.getGoalGate()) return false;
+    return true;
 }
 
 // Test

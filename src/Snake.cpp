@@ -48,8 +48,16 @@ int Snake::getPoisonCount() {
     return poisonCount;
 }
 
+int Snake::getGateCount() {
+    return gateCount;
+}
+
 int Snake::getLength() {
     return snakePos.size();
+}
+
+int Snake::getMaxLength() {
+    return maxLength;
 }
 
 void Snake::setFailed() {
@@ -190,4 +198,8 @@ void Snake::eatPoisonItem() {
 
 void Snake::setCurLength() {
     curLength = getLength();
+}
+
+void Snake::upGrowCount() {
+    growCount++;
 }

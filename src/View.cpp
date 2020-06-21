@@ -18,6 +18,7 @@ View::View() {
     init_pair('r', COLOR_RED, COLOR_BLACK);
     init_pair('p', COLOR_YELLOW, COLOR_BLACK);
     init_pair(4, COLOR_BLACK, COLOR_BLACK);
+    init_pair('b', 8, COLOR_BLACK);
     
     bkgd(COLOR_PAIR(1));
 }
@@ -31,6 +32,13 @@ void View::drawGameOver(){
     clear();
     nodelay(stdscr, FALSE);
     mvprintw(10, 10, "Gameover...");
+    getch();
+}
+
+void View::drawGameClear(){
+    clear();
+    nodelay(stdscr, FALSE);
+    mvprintw(10, 10, "Clear!");
     getch();
 }
 
@@ -61,13 +69,19 @@ void View::drawGameWindow(Map map) {
         for(int j=0; j<map.mapWidth; j++) {
             int pos = map.getMapValue(i, j);
             if(pos == 0) {
+                wattron(gameWindow, COLOR_PAIR(1));
                 wprintw(gameWindow, "  ");
             }
             else if(pos == 1 || pos == 2) {
+                wattron(gameWindow, COLOR_PAIR(1));
                 wprintw(gameWindow, " ");
                 mvwprintw(gameWindow, i, 2*j, "■");
             }
-
+            else if(pos == 5) {
+                wattron(gameWindow, COLOR_PAIR('b'));
+                wprintw(gameWindow, " ");
+                mvwprintw(gameWindow, i, 2*j, "■");
+            }
         }
     }
 }

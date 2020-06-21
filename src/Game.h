@@ -26,7 +26,8 @@ public:
     bool isCollision();
     bool isGetItem();
     bool isOnGate();
-    void isGameClear();
+    bool isGameClear();
+    bool isLevelClear();
 
 };
 

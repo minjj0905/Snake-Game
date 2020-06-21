@@ -2,6 +2,7 @@
 #define __LEVEL__
 
 #include "Map.h"
+#include "Mission.h"
 
 class Level {
 public:
@@ -10,6 +11,11 @@ public:
     
     /*Map 객체 array*/
     Map maps[4];
+
+    Mission missions[4];
+
+    /* 해당 맵 클리어했는지*/
+    bool clear[4];
 
     /*생성자 currentLevel을 0으로 초기화*/
     Level();
@@ -25,5 +31,15 @@ public:
 
     /*Map 객체 array에 맵을 넣는다.*/
     void createMap();
+
+    /* 현재 맵 클리어했는지 설정 */
+    void setClear(bool b);
+
+    /* 현재 맵 클리어했는지 확인 */
+    bool getClear();
+
+    /* 미션 반환 */
+    Mission getMission();
+
 };
 #endif

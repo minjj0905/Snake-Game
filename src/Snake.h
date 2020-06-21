@@ -33,6 +33,9 @@ public:
     /*poison Item 먹은 횟수*/
     int poisonCount;
 
+    /* Gate count */
+    int gateCount;
+
     /*Snake의 maxLength저장*/
     int maxLength;
 
@@ -60,8 +63,14 @@ public:
     /*poison Item 먹은 횟수 반환*/
     int getPoisonCount();
 
+    /*Gate 이용 횟수 반환 */
+    int getGateCount();
+
     /*snake의 길이 반환*/
     int getLength();
+
+    /*snake의 maxlength 반환 */
+    int getMaxLength();
 
     /*snake가 죽음*/
     void setFailed();
@@ -107,5 +116,8 @@ public:
 
     /*snake의 curLength를 설정*/
     void setCurLength();
+
+    /* GrowCount 올리기 */
+    void upGrowCount();
 };
 #endif
