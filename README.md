@@ -1,4 +1,4 @@
-# kmucs-cpp-snakegame
+# Snake-Game
 
 2020년 1학기 C++프로그래밍 프로젝트로 진행된 ncurses를 이용한 SnakeGame Project입니다.
 
