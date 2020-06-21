@@ -15,6 +15,7 @@ void Game::newGame() {
 void Game::runGame() {
     clear();
     while(!isGameClear()) {
+        clear();
         runLevel();
         if(level.getClear()) {
             if(level.getCurrentLevel() == 3) {
