@@ -210,7 +210,7 @@ void View::drawScoreWindow(Snake snake, Mission mission, int time) {
     mvwprintw(scoreWindow, 17, 7, "Gate Used   : ");
     mvwprintw(scoreWindow, 17, 21, std::to_string(mission.getGoalGate()).c_str());
     if(mission.getGoalGate() <= snake.getGateCount()) {
-         mvwprintw(scoreWindow, 14, 26, "✔");
+         mvwprintw(scoreWindow, 17, 26, "✔");
     }
 
     //구분선
